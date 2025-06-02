@@ -4,43 +4,142 @@
 {% block title %}Live Market Data{% endblock %}
 
 {% block content %}
-    <div class="container mt-4">
-        <h2 class="text-center mb-xl-4">📈 Live Market Data</h2>
-        <div class="container text-center mt-5">
-            <div class="d-flex justify-content-between mb-sm-1">
-                <form class="subscribe">
-                    <div class="d-flex align-items-center">
+<h4>https://margincalculator.angelbroking.com/OpenAPI_File/files/OpenAPIScripMaster.json</h4>
+<div class="container mt-4">
+    <div class="row">
+        <!-- Left Column: Live Market Data -->
+        <div class="col-md-6">
+            <h2 class="text-center mb-xl-4">📈 Live Market Data</h2>
+
+            <div class="text-center mt-5">
+                <div class="d-flex justify-content-between mb-sm-1">
+                    <form class="subscribe">
+                        <div class="d-flex align-items-center">
                             <input type="text" class="form-control border border-success me-1" id="subscribe-input" placeholder="Subscribe" aria-label="subscribe">
                             <button class="border border-success rounded" style="height: 35px;" type="submit">Subscribe</button> 
-                    </div>
-                </form>
-                <form class="unsubscribe">
-                    <div class="d-flex align-items-center">
-                        <input type="text" class="form-control border-danger-subtle me-1" id="unsubscribe-input" placeholder="Unsubscribe" aria-label="Unsubscribe">
-                        <button class="border border-danger-subtle rounded" style="height: 35px;" type="submit">Unsubscribe</button>
-                    </div>
-                </form>
+                        </div>
+                    </form>
+                    <form class="unsubscribe">
+                        <div class="d-flex align-items-center">
+                            <input type="text" class="form-control border-danger-subtle me-1" id="unsubscribe-input" placeholder="Unsubscribe" aria-label="Unsubscribe">
+                            <button class="border border-danger-subtle rounded" style="height: 35px;" type="submit">Unsubscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover mt-3">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Token</th>
+                            <th>Symbol</th>
+                            <th>LTP</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody id="market_data">
+                        <tr><td colspan="5" class="text-center">Waiting for updates...</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <table class="table table-bordered table-striped table-hover">
-            <thead class="table-primary">
-                <tr>
-                    <th>Token</th>
-                    <th>Symbol</th>
-                    <th>Exchange Type</th>
-                    <th>LTP</th>
-                    <th>Sequence No.</th>
-                    <th>Exchange Timestamp</th>
-                    <th>Current Timestamp</th>
-                    <th>Diff Timestamp</th>
-                    <th>Subscription Mode</th>
-                </tr>
-            </thead>
-            <tbody id="market_data">
-                <tr><td colspan="9" class="text-center">Waiting for updates...</td></tr>
-            </tbody>
-        </table>
+
+        <!-- Right Column: Punch Order -->
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">🛒 Punch Order</h2>
+            <form id="punchOrderForm">
+                <div class="mb-3">
+                    <label for="symbol" class="form-label">Symbol</label>
+                    <input type="text" class="form-control" id="punch_order_symbol" placeholder="e.g. RELIANCE">
+                </div>
+
+                <div class="mb-3">
+                    <label for="lots" class="form-label">Lots (Multiples of 75)</label>
+                    <input type="number" class="form-control" id="lots" placeholder="e.g. 1" min="1" value="1">
+                </div>
+
+                <div class="mb-3">
+                    <label for="triggerPrice" class="form-label">Trigger Price</label>
+                    <input type="number" class="form-control" id="triggerPrice" placeholder="e.g. 2450" step="0.05" oninput="updateEntryPrice()">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Entry Price</label>
+                    <p id="entryPrice" class="form-control-plaintext text-success fw-bold">--</p>
+                </div>
+
+                <div class="mb-3">
+                    <label for="orderType" class="form-label">Order Type</label>
+                    <select class="form-select" id="orderType">
+                        <option value="MARKET">Market</option>
+                        <option value="LIMIT">Limit</option>
+                        <option value="STOPLOSS_LIMIT" selected>Stop Loss Limit</option>
+                    </select>
+                </div>
+
+                <div class="d-flex justify-content-around">
+                    <button type="button" class="btn btn-success px-4" onclick="placeBuyOrder()">Buy</button>
+                    <button type="button" class="btn btn-danger px-4" onclick="placeSellOrder()">Sell</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- get order book -->
+        <div class="text-center my-4">
+            <button type="button" class="btn btn-primary" onclick="fetchOrderBook()">📋 Get Order Book</button>
+        </div>
+
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered table-hover">
+                <thead class="table-info">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Symbol</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Qty</th>
+                        <th>Filled</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody id="orderBookTable">
+                    <tr><td colspan="7" class="text-center">No order data available</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- trade book -->
+        <div class="text-center my-4">
+            <button type="button" class="btn btn-success" onclick="fetchTradeBook()">📘 Get Trade Book</button>
+        </div>
+
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered table-hover">
+                <thead class="table-success">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Symbol</th>
+                        <th>Strike Price</th>
+                        <th>Trade Value</th>
+                        <th>Transaction Type</th>
+                        <th>MarketLot</th>
+                        <th>Fill ID</th>
+                        <th>Fill Time</th>
+                        <th>Fill Price</th>
+                        <th>Fill Size</th>
+                    </tr>
+                </thead>
+                <tbody id="tradeBookTable">
+                    <tr><td colspan="7" class="text-center">No trade data available</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        
     </div>
+</div>
 
     <script src="{% static 'js/market_data.js' %}"></script>
+    <script src="{% static 'js/order.js' %}"></script>
 {% endblock %}

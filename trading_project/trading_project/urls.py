@@ -22,9 +22,10 @@ from django.contrib.auth.views import LogoutView, LoginView
 urlpatterns = [
     path('',views.user_login, name='login'),
     # path('', LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
+    # path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),  # Include Django's auth URLs
     path('', include(('smart_api_integration.urls', 'smart_api_integration'), namespace='smart_api_integration')),
     path('', include('market_data.urls')),
+    path('accounts/',include('accounts.urls'))
 ]

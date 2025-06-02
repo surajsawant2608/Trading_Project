@@ -4,8 +4,10 @@ const subscribeInput = document.querySelector("#subscribe-input");
 const unsubscribeForm = document.querySelector(".unsubscribe");
 const unsubscribeInput = document.querySelector("#unsubscribe-input");
 const socket = new WebSocket("ws://localhost:8000/ws/market_data/");
-const tokenRows = {};  
-let tokenSymbolMap = {}; 
+const tokenRows = {};
+const symbolInput = document.getElementById('punch_order_symbol');
+const tableBody = document.getElementById("market_data");
+window.tokenSymbolMap = {};
 
 // Subscribe function
 function subscribeTokens(tokens) {
@@ -48,7 +50,7 @@ unsubscribeForm.addEventListener("submit", function (event) {
 // Load token-symbol mappings
 async function loadTokenMappings() {
     try {
-        const response = await fetch("/static/OpenAPIScripMaster.json");
+        const response = await fetch("/static/OpenAPIScripMaster_1748412258566.json");
         const data = await response.json();
         data.forEach(item => {
             tokenSymbolMap[item.token] = item.symbol;
@@ -61,76 +63,82 @@ async function loadTokenMappings() {
 
 loadTokenMappings();
 
-socket.onopen = function() {
+// Add event delegation: listen for clicks on symbol cells
+tableBody.addEventListener('click', function(event) {
+    const target = event.target;
+    if (target.classList.contains('symbol-cell')) {
+        const symbol = target.textContent.trim();
+        symbolInput.value = symbol;
+        console.log(`✅ Symbol "${symbol}" set in Punch Order form.`);
+    }
+});
+
+socket.onopen = function () {
     console.log("✅ Connected to WebSocket");
 };
 
-socket.onmessage = function(event) {
+socket.onmessage = function (event) {
     try {
-        console.log("📩 Raw WebSocket Data:", event.data);
         const parsedData = JSON.parse(event.data);
         const marketData = parsedData.data || parsedData;
         const token = marketData.token;
-        const symbol = tokenSymbolMap[token] || "Unknown";  
-        const tableBody = document.getElementById("market_data");
+        const symbol = tokenSymbolMap[String(token)] || "Unknown";
 
-        if (tableBody.children.length === 1 && tableBody.firstChild.textContent.includes("Waiting")) {
-            tableBody.innerHTML = "";
+        // Remove "Waiting for updates..." row if it exists
+        const waitingRow = tableBody.querySelector("td[colspan]");
+        if (waitingRow && waitingRow.textContent.includes("Waiting for updates")) {
+            tableBody.removeChild(waitingRow.parentElement);
         }
 
-        const exchangeTimestamp = new Date(marketData.exchange_timestamp);
-        const currentTimestamp = new Date();
-        const timeDifference = ((currentTimestamp - exchangeTimestamp) / 1000).toFixed(2);
-
-        function formatTimestamp(date) {
-            return date.toLocaleString("en-GB", { 
-                year: "numeric", month: "2-digit", day: "2-digit", 
-                hour: "2-digit", minute: "2-digit", second: "2-digit", 
-                hour12: false 
-            }).replace(",", "") + `:${date.getMilliseconds().toString().padStart(3, '0')}`;
+        // Handle unsubscribe confirmation
+        if (parsedData.action === "unsubscribe_confirmation") {
+            console.log(`✅ Confirmed Unsubscribed: ${parsedData.tokens}`);
+            parsedData.tokens.forEach(token => {
+                const row = document.getElementById(`token-${token}`);
+                if (row) {
+                    row.remove();
+                    console.log(`❌ Removed token ${token} from UI`);
+                }
+                delete tokenRows[token];
+                delete tokenSymbolMap[token];
+            });
+            return;
         }
 
-        const formattedExchangeTime = formatTimestamp(exchangeTimestamp);
-        const formattedCurrentTime = formatTimestamp(currentTimestamp);
-
+        // Create or update table row
         let row = document.getElementById(`token-${token}`);
         if (!row) {
             row = document.createElement("tr");
             row.id = `token-${token}`;
             row.innerHTML = `
                 <td>${token}</td>
-                <td id="symbol-${token}">${symbol}</td>
-                <td>${marketData.exchange_type}</td>
-                <td class="ltp text-success fw-bold" id="ltp-${token}">${(marketData.last_traded_price / 100).toFixed(2)}</td>
-                <td id="seq-${token}">${marketData.sequence_number}</td>
-                <td id="exchange-time-${token}">${formattedExchangeTime}</td>
-                <td id="current-time-${token}">${formattedCurrentTime}</td>
-                <td id="time-diff-${token}">${timeDifference} sec</td>
-                <td>${marketData.subscription_mode_val}</td>
+                <td class="symbol-cell" style="cursor: pointer;" id="symbol-${token}">${symbol}</td>
+                <td class="ltp text-success fw-bold" id="ltp-${token}">
+                    ${(marketData.last_traded_price / 100).toFixed(2)}
+                </td>
             `;
             tableBody.appendChild(row);
-            tokenRows[token] = row;  
+            tokenRows[token] = row;
         } else {
             row.querySelector(`#ltp-${token}`).innerText = (marketData.last_traded_price / 100).toFixed(2);
-            row.querySelector(`#seq-${token}`).innerText = marketData.sequence_number;
-            row.querySelector(`#exchange-time-${token}`).innerText = formattedExchangeTime;
-            row.querySelector(`#current-time-${token}`).innerText = formattedCurrentTime;
-            row.querySelector(`#time-diff-${token}`).innerText = `${timeDifference} sec`;
-
             const symbolCell = row.querySelector(`#symbol-${token}`);
             if (symbolCell.innerText === "Unknown") {
                 symbolCell.innerText = symbol;
             }
         }
+
     } catch (error) {
         console.error("❌ Error parsing JSON:", error);
     }
 };
 
-socket.onclose = function() {
+socket.onclose = function () {
     console.log("❌ WebSocket Disconnected");
 };
 
-socket.onerror = function(error) {
+socket.onerror = function (error) {
     console.error("❌ WebSocket Error:", error);
 };
+
+
+

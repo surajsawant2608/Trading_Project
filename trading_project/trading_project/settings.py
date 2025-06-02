@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'market_data',
+    'accounts',
     'smart_api_integration',
     'channels',
 
@@ -65,6 +66,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'trading_project/templates'),
             os.path.join(BASE_DIR, 'smart_api_integration/templates'), 
             os.path.join(BASE_DIR, 'market_data/templates')
@@ -91,6 +93,8 @@ CHANNEL_LAYERS = {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
             "hosts": [("127.0.0.1", 6379)],
+            "capacity": 2000,  # ✅ Increased Redis buffer size
+            "expiry": 5,  # ✅ Reduce message expiry time for fast clearance
         },
     },
 }
