@@ -61,7 +61,7 @@ def place_order(request):
                 "X-PrivateKey": user_cred.api_key
             }
 
-            if order_type is "STOPLOSS_LIMIT":
+            if order_type == "STOPLOSS_LIMIT":
                 # 📦 Prepare the payload
                 payload = json.dumps({
                     "variety":"STOPLOSS",
@@ -88,10 +88,10 @@ def place_order(request):
                     "ordertype":order_type,
                     "producttype":"CARRYFORWARD",
                     "duration":"DAY",
-                    "price": data.get("price", 0),
+                    "price": data.get("triggerprice", 0),
                     "quantity": quantity *75,
                     })
-            print(payload)
+            print('Place order :- ' +payload)
 
             # 🌐 Make the request to Angel One
             conn = http.client.HTTPSConnection("apiconnect.angelone.in")
@@ -142,6 +142,7 @@ def get_order_book(request):
         res = conn.getresponse()
         data = res.read()
         json_data = json.loads(data.decode("utf-8"))
+        # print('Order Book :- '+json_data)
         return JsonResponse(json_data, safe=False)
 
     except Exception as e:
@@ -174,6 +175,7 @@ def get_trade_book(request):
         res = conn.getresponse()
         data = res.read()
         json_data = json.loads(data.decode("utf-8"))
+        # print('Trade Book :- ' + json_data)
         return JsonResponse(json_data, safe=False)
 
     except Exception as e:
