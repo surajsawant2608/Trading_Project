@@ -69,6 +69,32 @@
                     <p id="entryPrice" class="form-control-plaintext text-success fw-bold">--</p>
                 </div>
 
+                <!-- ✅ Checkbox to use same % for upper and lower -->
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" id="useSamePercent" checked onchange="toggleTargetStopInputs()">
+                    <label class="form-check-label" for="useSamePercent">Use same % for Target & Stoploss</label>
+                </div>
+
+                <!-- ✅ One % input if checkbox is checked -->
+                <div class="mb-3" id="percentInputGroup">
+                    <label for="percent" class="form-label">Target/Stoploss % (Default is 3%)</label>
+                    <input type="number" class="form-control" id="percent" placeholder="e.g. 3" step="0.1" value="3">
+                </div>
+
+                <!-- ✅ Two % inputs if checkbox is unchecked -->
+                <div class="mb-3 d-none" id="separatePercentInputs">
+                    <label for="target-percent" class="form-label">Target %</label>
+                    <input type="number" class="form-control mb-2" id="target-percent" placeholder="e.g. 3" step="0.1">
+
+                    <label for="stoploss-percent" class="form-label">Stoploss %</label>
+                    <input type="number" class="form-control" id="stoploss-percent" placeholder="e.g. 3" step="0.1">
+                </div>
+
+
+
+
+
+
                 <div class="mb-3">
                     <label for="orderType" class="form-label">Order Type</label>
                     <select class="form-select" id="orderType">

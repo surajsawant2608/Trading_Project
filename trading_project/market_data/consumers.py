@@ -15,13 +15,6 @@ from asgiref.sync import async_to_sync
 from django.contrib.auth import get_user_model
 import os
 
-
-# SmartAPI Credentials
-# API_KEY = "8uXjWEje"
-# CLIENT_ID = "S1143520"
-# AUTH_TOKEN = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IlMxMTQzNTIwIiwicm9sZXMiOjAsInVzZXJ0eXBlIjoiVVNFUiIsInRva2VuIjoiZXlKaGJHY2lPaUpTVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SjFjMlZ5WDNSNWNHVWlPaUpqYkdsbGJuUWlMQ0owYjJ0bGJsOTBlWEJsSWpvaWRISmhaR1ZmWVdOalpYTnpYM1J2YTJWdUlpd2laMjFmYVdRaU9qRXhMQ0p6YjNWeVkyVWlPaUl6SWl3aVpHVjJhV05sWDJsa0lqb2lZemMzWWpSaU5qRXRZekV5T1MwellXSmhMVGxpWXpJdE5UUTBNakpoT1RBMlkyTmhJaXdpYTJsa0lqb2lkSEpoWkdWZmEyVjVYM1l5SWl3aWIyMXVaVzFoYm1GblpYSnBaQ0k2TVRFc0luQnliMlIxWTNSeklqcDdJbVJsYldGMElqcDdJbk4wWVhSMWN5STZJbUZqZEdsMlpTSjlMQ0p0WmlJNmV5SnpkR0YwZFhNaU9pSmhZM1JwZG1VaWZYMHNJbWx6Y3lJNkluUnlZV1JsWDJ4dloybHVYM05sY25acFkyVWlMQ0p6ZFdJaU9pSlRNVEUwTXpVeU1DSXNJbVY0Y0NJNk1UYzBORGM0TmpFek5Dd2libUptSWpveE56UTBOams1TlRVMExDSnBZWFFpT2pFM05EUTJPVGsxTlRRc0ltcDBhU0k2SW1ZeFpUTmtaRFF3TFRWaVlUSXROR0ZpWmkwNE5EQmpMVEJsWXpKaE5tVTFNV1ZpTlNJc0lsUnZhMlZ1SWpvaUluMC5xYVF0X2lYRW12TDJYTGdKenF0UFpqUWFGdTFTTFAyWG02TmJJWHZ6NGFGQXNZM3RhVGt0OWRwTnUteDhxMTdPU013LVdIOTBXX0JJQTNraVU0OVZyMWUxSURPMkVXXzVsVWxhRldSTXNzLWNBRUw5dWx2Q1dGbXVhS01VUkFLN0dKczNpanNQRXhOWnJpTTFzWFppS05iWGdyZTlBYTdvYXp2RzBKZ3FEZ2siLCJBUEktS0VZIjoiOHVYaldFamUiLCJpYXQiOjE3NDQ2OTk3MzQsImV4cCI6MTc0NDc4NjEzNH0.vBwoiwINInwTzxLmw3nSaddbJEDJT7eF7qxlMgP-Pd7VBzZCQUcwng1v2i1wCbbDhoifwEyd04U6Lcl3ux02EQ"
-# FEED_TOKEN = "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VybmFtZSI6IlMxMTQzNTIwIiwiaWF0IjoxNzQ0Njk5NzM0LCJleHAiOjE3NDQ3ODYxMzR9.Lo-WBrAjaqKKnRWv9rgkm7M8iURgZOwES20wwXD42nMat5tsNbZc5KHXazwQRHXyTmP9eHHnOi6R5xrEgI8EFg"
-
 class MarketDataConsumer(AsyncWebsocketConsumer):
     
     async def connect(self):
@@ -102,7 +95,7 @@ class MarketDataConsumer(AsyncWebsocketConsumer):
 
         correlation_id = "abc1234"
         mode = 1
-        tokens = ["40468","40470","40491","40492","40487","40489"]
+        tokens = ["44868","44870","44872","44874","44878",    "44875","44873","44871","44869","44867","44863","44861","44859","44857","44855"]
         token_list = [{"exchangeType": 2, "tokens": tokens}]
 
         def process_messages():

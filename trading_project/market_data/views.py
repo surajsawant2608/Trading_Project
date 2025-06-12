@@ -78,7 +78,7 @@ def place_order(request):
                     "triggerprice": float(data.get("triggerprice", 0)) if order_type == "STOPLOSS_LIMIT" else 0
                 })
 
-            else:
+            elif order_type == "LIMIT":
                 payload = json.dumps({
                     "variety":"NORMAL",
                     "tradingsymbol":symbol,
@@ -91,6 +91,22 @@ def place_order(request):
                     "price": data.get("triggerprice", 0),
                     "quantity": quantity *75,
                     })
+
+            elif order_type == "MARKET":
+                payload = json.dumps({
+                    "variety":"NORMAL",
+                    "tradingsymbol":symbol,
+                    "symboltoken":token,
+                    "transactiontype":transactiontype,
+                    "exchange":"NFO",
+                    "ordertype":order_type,
+                    "producttype":"CARRYFORWARD",
+                    "duration":"DAY",
+                    "quantity": quantity *75,
+                })
+            else:   
+                return JsonResponse({"status": "error", "message": "Invalid order type."}, status=400)
+            
             print('Place order :- ' +payload)
 
             # 🌐 Make the request to Angel One
