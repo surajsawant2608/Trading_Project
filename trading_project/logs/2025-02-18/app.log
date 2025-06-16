@@ -1,0 +1,6 @@
+[I 250218 09:46:20 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250218 09:51:22 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250218 09:51:35 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250218 18:11:47 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250218 18:12:16 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250218 18:14:44 smartWebSocketV2:129] WebSocket connection established successfully.

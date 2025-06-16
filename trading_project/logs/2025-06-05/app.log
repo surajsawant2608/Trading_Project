@@ -1,0 +1,54 @@
+[I 250605 09:21:32 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250605 09:21:33 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250605 09:21:35 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250605 09:21:43 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250605 09:22:12 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250605 09:22:12 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250605 09:22:22 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250605 09:24:31 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250605 09:24:41 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250605 11:14:34 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250605 11:29:33 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250605 11:46:21 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250605 14:43:30 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[E 250605 14:43:41 consumers:126] WebSocket error: Connection closed
+[W 250605 14:43:41 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250605 14:43:41 consumers:126] WebSocket error: Connection closed
+[W 250605 14:43:41 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250605 14:43:41 consumers:126] WebSocket error: Connection closed
+[W 250605 14:43:41 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[W 250605 14:44:08 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[E 250605 14:44:19 consumers:126] WebSocket error: Connection closed
+[W 250605 14:44:19 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250605 14:44:19 consumers:126] WebSocket error: Connection closed
+[W 250605 14:44:19 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250605 14:44:19 consumers:126] WebSocket error: Connection closed
+[W 250605 14:44:19 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[I 250605 14:45:50 smartConnect:124] in pool
+[W 250605 14:46:00 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[E 250605 14:46:10 consumers:126] WebSocket error: Connection closed
+[W 250605 14:46:10 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250605 14:46:10 consumers:126] WebSocket error: Connection closed
+[W 250605 14:46:10 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250605 14:46:10 consumers:126] WebSocket error: Connection closed
+[W 250605 14:46:10 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[W 250605 14:46:34 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[E 250605 14:46:45 consumers:126] WebSocket error: Connection closed
+[W 250605 14:46:45 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250605 14:46:45 consumers:126] WebSocket error: Connection closed
+[W 250605 14:46:45 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250605 14:46:45 consumers:126] WebSocket error: Connection closed
+[W 250605 14:46:45 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[W 250605 14:48:39 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[E 250605 14:48:49 consumers:126] WebSocket error: Connection closed
+[W 250605 14:48:49 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250605 14:48:49 consumers:126] WebSocket error: Connection closed
+[W 250605 14:48:49 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250605 14:48:49 consumers:126] WebSocket error: Connection closed
+[W 250605 14:48:49 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[I 250605 14:50:30 smartConnect:124] in pool
+[I 250605 14:50:35 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250605 14:50:40 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250605 14:50:48 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250605 14:50:50 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250605 15:01:39 smartWebSocketV2:129] WebSocket connection established successfully.

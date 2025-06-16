@@ -7,6 +7,7 @@ const socket = new WebSocket("ws://localhost:8000/ws/market_data/");
 const tokenRows = {};
 const symbolInput = document.getElementById('punch_order_symbol');
 const tableBody = document.getElementById("market_data");
+const optionChainContainer = document.getElementById("option_chain_data");
 window.tokenSymbolMap = {};
 
 
@@ -51,7 +52,7 @@ unsubscribeForm.addEventListener("submit", function (event) {
 // Load token-symbol mappings
 async function loadTokenMappings() {
     try {
-        const response = await fetch("/static/OpenAPIScripMaster_1748412258566.json");
+        const response = await fetch("/static/OpenAPIScripMaster13062025.json");
         const data = await response.json();
         data.forEach(item => {
             tokenSymbolMap[item.token] = item.symbol;
@@ -73,6 +74,7 @@ tableBody.addEventListener('click', function(event) {
         console.log(`✅ Symbol "${symbol}" set in Punch Order form.`);
     }
 });
+
 
 socket.onopen = function () {
     console.log("✅ Connected to WebSocket");
@@ -133,6 +135,39 @@ socket.onmessage = function (event) {
                 symbolCell.innerText = symbol;
             }
         }
+
+
+
+        // // Create or update table row
+        // let row = document.getElementById(`token-${token}`);
+        // const ltp = (marketData.last_traded_price / 100).toFixed(2);
+        // if (!row) {
+        //     row = document.createElement("tr");
+        //     row.id = `token-${token}`;
+        //     row.innerHTML = `
+        //         <td>${token}</td>
+        //         <td class="symbol-cell" style="cursor: pointer;" id="symbol-${token}">${symbol}</td>
+        //         <td class="ltp text-success fw-bold" id="ltp-${token}">
+        //             ${ltp}
+        //         </td>
+        //     `;
+        //     tableBody.appendChild(row);
+        //     tokenRows[token] = row;
+        // } else {
+        //     row.querySelector(`#ltp-${token}`).innerText = ltp;
+        //     const symbolCell = row.querySelector(`#symbol-${token}`);
+        //     if (symbolCell.innerText === "Unknown") {
+        //         symbolCell.innerText = symbol;
+        //     }
+        // }
+
+        // // Update Option Chain
+        // if (symbol !== "Unknown") {
+        //     updateOptionChain(symbol, parseFloat(ltp));
+        // }
+
+
+
 
     } catch (error) {
         console.error("❌ Error parsing JSON:", error);

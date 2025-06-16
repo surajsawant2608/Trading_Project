@@ -1,0 +1,20 @@
+[I 250219 09:24:56 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250219 09:28:27 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250219 09:42:34 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250219 17:56:30 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250219 17:56:30 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250219 17:56:40 smartWebSocketV2:129] WebSocket connection established successfully.
+[E 250219 17:56:40 smartWebSocketV2:309] Error occurred during WebSocket connection: SmartWebSocketV2.on_error() takes 1 positional argument but 3 were given
+[E 250219 17:56:40 smartWebSocketV2:338] Error occurred during resubscribe/reconnect: SmartWebSocketV2.on_error() takes 1 positional argument but 3 were given
+[E 250219 17:56:40 smartWebSocketV2:309] Error occurred during WebSocket connection: SmartWebSocketV2.on_error() takes 1 positional argument but 3 were given
+[I 250219 17:57:21 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250219 17:57:21 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250219 17:57:31 smartWebSocketV2:129] WebSocket connection established successfully.
+[E 250219 17:57:31 smartWebSocketV2:309] Error occurred during WebSocket connection: SmartWebSocketV2.on_error() takes 1 positional argument but 3 were given
+[E 250219 17:57:31 smartWebSocketV2:338] Error occurred during resubscribe/reconnect: SmartWebSocketV2.on_error() takes 1 positional argument but 3 were given
+[E 250219 17:57:31 smartWebSocketV2:309] Error occurred during WebSocket connection: SmartWebSocketV2.on_error() takes 1 positional argument but 3 were given
+[I 250219 17:58:11 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250219 17:59:16 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250219 17:59:47 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250219 18:00:17 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250219 18:00:26 smartWebSocketV2:129] WebSocket connection established successfully.

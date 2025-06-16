@@ -1,0 +1,6 @@
+[W 250307 09:45:22 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[E 250307 09:45:32 smartWebSocketV2:309] Error occurred during WebSocket connection: SmartWebSocketV2.on_error() takes 1 positional argument but 3 were given
+[E 250307 09:45:32 smartWebSocketV2:338] Error occurred during resubscribe/reconnect: SmartWebSocketV2.on_error() takes 1 positional argument but 3 were given
+[E 250307 09:45:32 smartWebSocketV2:309] Error occurred during WebSocket connection: SmartWebSocketV2.on_error() takes 1 positional argument but 3 were given
+[I 250307 09:45:37 smartConnect:124] in pool
+[I 250307 09:45:40 smartWebSocketV2:129] WebSocket connection established successfully.

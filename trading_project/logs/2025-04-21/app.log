@@ -1,0 +1,59 @@
+[W 250421 10:26:50 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[E 250421 10:27:00 consumers:132] WebSocket error: Connection closed
+[W 250421 10:27:00 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250421 10:27:00 consumers:132] WebSocket error: Connection closed
+[W 250421 10:27:00 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250421 10:27:00 consumers:132] WebSocket error: Connection closed
+[W 250421 10:27:00 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[I 250421 10:27:17 smartConnect:124] in pool
+[I 250421 10:27:27 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 10:36:00 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250421 10:36:28 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250421 10:36:29 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 10:36:38 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 10:46:40 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 10:47:13 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 10:48:10 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 10:49:59 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 11:18:03 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 11:19:10 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 11:22:18 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 11:24:40 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 11:27:30 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:18:55 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:20:18 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:39:46 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250421 15:39:52 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250421 15:39:52 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:40:02 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:41:23 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:42:09 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:42:45 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250421 15:43:06 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250421 15:43:06 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:43:16 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:43:46 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250421 15:43:50 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250421 15:43:50 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:44:00 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:47:31 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250421 15:47:35 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250421 15:47:36 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:47:46 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:48:31 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250421 15:48:59 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250421 15:49:00 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:49:10 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:49:33 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:55:31 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:57:45 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250421 15:57:53 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250421 15:57:54 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 15:58:04 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 16:01:16 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250421 16:01:32 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250421 16:01:32 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250421 16:01:34 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250421 16:01:40 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 16:01:42 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250421 16:01:44 smartWebSocketV2:129] WebSocket connection established successfully.
