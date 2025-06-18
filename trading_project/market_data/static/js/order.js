@@ -178,7 +178,7 @@ async function placeBuyOrder() {
                                             sl = entry;
                                             targetReached++;
                                             stepTarget = stepTarget * (1 + step);
-                                            console.log(`✅ 1 lot booked at 3%, SL moved to cost.`);
+                                            console.log(`✅ 1 lot booked at 3%, SL moved to cost. Target ${stepTarget} next_target ${targetReached}`);
                                         } else if (filled > 2 && targetReached === 0) {
                                             const exitQty = Math.ceil(filled * 0.75);
                                             sendSell(tradingsymbol, symboltoken, exitQty, ltp);
@@ -186,13 +186,13 @@ async function placeBuyOrder() {
                                             sl = entry;
                                             targetReached++;
                                             stepTarget = stepTarget * (1 + step);
-                                            console.log(`✅ 75% booked, SL moved to cost.`);
+                                            console.log(`✅ 75% booked, SL moved to cost.Target ${stepTarget} next_target ${targetReached}`);
                                         } else {
                                             // Continue trailing
                                             sl = entry * (1 + step * targetReached);
                                             targetReached++;
                                             stepTarget = stepTarget * (1 + step);
-                                            console.log(`📈 Trailing SL moved up to ₹${sl}`);
+                                            console.log(`📈 Trailing SL moved up to ₹${sl} next target ${targetReached}`);
                                         }
                                     }
                                 }, 350);
@@ -398,7 +398,12 @@ async function fetchOrderBook() {
         tableBody.innerHTML = ""; // Clear previous rows
 
         if (data.status && Array.isArray(data.data) && data.data.length > 0) {
-            data.data.forEach(order => {
+            const sortedOrders = data.data.sort((a, b) => {
+                const timeA = new Date(`1970-01-01T${a.filltime}`);
+                const timeB = new Date(`1970-01-01T${b.filltime}`);
+                return timeA - timeB;
+            });
+            sortedOrders.forEach(order => {
                 const row = `
                     <tr>
                         <td>${order.updatetime}</td>
@@ -437,7 +442,12 @@ async function fetchTradeBook() {
         tableBody.innerHTML = ""; // Clear previous rows
 
         if (data.status && data.data && Array.isArray(data.data) && data.data.length > 0) {
-            data.data.forEach(trade => {
+            const sortedTrades = data.data.sort((a, b) => {
+                const timeA = new Date(`1970-01-01T${a.filltime}`);
+                const timeB = new Date(`1970-01-01T${b.filltime}`);
+                return timeA - timeB;
+            });
+            sortedTrades.forEach(trade => {
                 const row = `
                     <tr>
                         <td>${trade.orderid}</td>
@@ -457,6 +467,28 @@ async function fetchTradeBook() {
         } else {
             tableBody.innerHTML = `<tr><td colspan="10" class="text-center">No trades found</td></tr>`;
         }
+
+        const CalTradeBook = data.data;
+
+        let totalBuy = 0;
+        let totalSell = 0;
+
+        CalTradeBook.forEach(trade => {
+            const tradeValue = parseFloat(trade.tradevalue); // Already appears to be a number
+            if (trade.transactiontype === "BUY") {
+                totalBuy += tradeValue;
+            } else if (trade.transactiontype === "SELL") {
+                totalSell += tradeValue;
+            }
+        });
+        
+        const pnl = totalSell - totalBuy;
+        document.getElementById("buyValue").textContent = `Buy: ₹${totalBuy.toFixed(2)}`;
+        document.getElementById("sellValue").textContent = `Sell: ₹${totalSell.toFixed(2)}`;
+        const pnlElement = document.getElementById("pnlValue");
+        pnlElement.textContent = `PnL: ₹${pnl.toFixed(2)}`;
+        pnlElement.style.color = pnl > 0 ? "green" : (pnl < 0 ? "red" : "black");
+        document.getElementById("pnlValue").textContent = `PnL: ₹${pnl.toFixed(2)}`;
 
     } catch (error) {
         console.error("❌ Error fetching trade book:", error);

@@ -1,0 +1,47 @@
+[I 250618 09:52:28 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250618 09:52:29 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250618 09:52:39 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250618 09:52:39 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250618 10:28:56 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[W 250618 10:28:56 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[E 250618 10:29:06 consumers:125] WebSocket error: Connection closed
+[W 250618 10:29:06 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250618 10:29:06 consumers:125] WebSocket error: Connection closed
+[W 250618 10:29:06 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250618 10:29:07 consumers:125] WebSocket error: Connection closed
+[W 250618 10:29:07 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250618 10:29:07 consumers:125] WebSocket error: Connection closed
+[W 250618 10:29:07 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250618 10:29:07 consumers:125] WebSocket error: Connection closed
+[W 250618 10:29:07 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[I 250618 10:29:08 smartConnect:124] in pool
+[W 250618 10:29:16 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[E 250618 10:29:36 consumers:125] WebSocket error: Connection closed
+[W 250618 10:29:36 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250618 10:29:36 consumers:125] WebSocket error: Connection closed
+[W 250618 10:29:36 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[E 250618 10:29:36 consumers:125] WebSocket error: Connection closed
+[W 250618 10:29:36 smartWebSocketV2:348] Connection closed due to max retry attempts reached.
+[I 250618 10:33:17 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250618 10:33:19 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250618 10:33:28 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250618 10:33:29 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250618 10:36:17 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250618 10:36:27 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250618 10:38:29 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250618 10:41:01 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250618 10:41:13 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250618 10:42:53 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250618 10:43:01 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250618 10:43:01 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250618 10:43:08 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250618 10:43:16 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250618 10:43:17 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250618 10:43:19 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250618 10:50:35 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250618 10:51:50 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250618 10:51:52 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250618 10:51:59 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250618 10:52:02 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250618 12:17:21 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250618 12:17:34 smartWebSocketV2:129] WebSocket connection established successfully.

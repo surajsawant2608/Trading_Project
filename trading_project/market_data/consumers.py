@@ -95,7 +95,7 @@ class MarketDataConsumer(AsyncWebsocketConsumer):
 
         correlation_id = "abc1234"
         mode = 1
-        tokens = ['51019','51013','51017','51019','51015'   ,'50998','51000','51002','50990','50992','50994','50996' ]
+        tokens = ['51011','51009','51007','51019','51013','51017','51019','51015'   ,'50998','51000','51002','50994','50996' ]
         token_list = [{"exchangeType": 2, "tokens": tokens}]
 
         def process_messages():
