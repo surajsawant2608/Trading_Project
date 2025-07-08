@@ -1,0 +1,28 @@
+[I 250628 12:04:16 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250628 12:06:01 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250628 12:07:12 smartWebSocketV2:129] WebSocket connection established successfully.
+[W 250628 12:12:23 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250628 12:12:31 smartWebSocketOrderUpdate:38] Connection opened
+[I 250628 12:12:31 order_updater_ws:14] 📩 Received order update: {"user-id": "S1143520","status-code": "200","order-status": "AB00","error-message": "","orderData": {"variety": "","ordertype": "","ordertag": "","producttype": "","price": 0.0,"triggerprice": 0.0,"quantity": "0","disclosedquantity": "0","duration": "","squareoff": 0.0,"stoploss": 0.0,"trailingstoploss": 0.0,"tradingsymbol": "","transactiontype": "","exchange": "","symboltoken": "","instrumenttype": "","strikeprice": 0.0,"optiontype": "","expirydate": "","lotsize": "0","cancelsize": "0","averageprice": 0.0,"filledshares": "","unfilledshares": "","orderid": "","text": "","status": "","orderstatus": "","updatetime": "","exchtime": "","exchorderupdatetime": "","fillid": "","filltime": "","parentorderid": ""}}
+[I 250628 12:12:31 order_updater_ws:29] ℹ️ Status Update: 
+[I 250628 12:12:32 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250628 12:12:33 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250628 12:12:59 order_updater_ws:14] 📩 Received order update: b'\x00'
+[E 250628 12:12:59 order_updater_ws:32] ❌ Error parsing message: Expecting value: line 1 column 1 (char 0)
+[W 250628 12:12:59 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250628 12:13:01 order_updater_ws:14] 📩 Received order update: b'\x00'
+[E 250628 12:13:01 order_updater_ws:32] ❌ Error parsing message: Expecting value: line 1 column 1 (char 0)
+[I 250628 12:13:11 order_updater_ws:14] 📩 Received order update: b'\x00'
+[E 250628 12:13:11 order_updater_ws:32] ❌ Error parsing message: Expecting value: line 1 column 1 (char 0)
+[I 250628 12:13:11 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250628 12:13:22 order_updater_ws:14] 📩 Received order update: b'\x00'
+[E 250628 12:13:22 order_updater_ws:32] ❌ Error parsing message: Expecting value: line 1 column 1 (char 0)
+[I 250628 14:07:57 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250628 14:07:57 smartWebSocketOrderUpdate:38] Connection opened
+[I 250628 14:07:57 order_updater_ws:14] 📩 Received order update: {"user-id": "S1143520","status-code": "200","order-status": "AB00","error-message": "","orderData": {"variety": "","ordertype": "","ordertag": "","producttype": "","price": 0.0,"triggerprice": 0.0,"quantity": "0","disclosedquantity": "0","duration": "","squareoff": 0.0,"stoploss": 0.0,"trailingstoploss": 0.0,"tradingsymbol": "","transactiontype": "","exchange": "","symboltoken": "","instrumenttype": "","strikeprice": 0.0,"optiontype": "","expirydate": "","lotsize": "0","cancelsize": "0","averageprice": 0.0,"filledshares": "","unfilledshares": "","orderid": "","text": "","status": "","orderstatus": "","updatetime": "","exchtime": "","exchorderupdatetime": "","fillid": "","filltime": "","parentorderid": ""}}
+[I 250628 14:08:17 order_updater_ws:14] 📩 Received order update: b'\x00'
+[I 250628 14:08:27 order_updater_ws:14] 📩 Received order update: b'\x00'
+[I 250628 14:08:37 order_updater_ws:14] 📩 Received order update: b'\x00'
+[I 250628 14:08:47 order_updater_ws:14] 📩 Received order update: b'\x00'
+[I 250628 14:08:57 order_updater_ws:14] 📩 Received order update: b'\x00'
+[I 250628 14:09:07 order_updater_ws:14] 📩 Received order update: b'\x00'

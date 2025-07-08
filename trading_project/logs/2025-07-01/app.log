@@ -1,0 +1,12 @@
+[I 250701 10:23:42 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250701 10:23:42 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250701 10:23:42 smartWebSocketOrderUpdate:38] Connection opened
+[I 250701 10:23:42 smartWebSocketOrderUpdate:38] Connection opened
+[I 250701 10:23:42 order_updater_ws:15] {"user-id": "S1143520","status-code": "200","order-status": "AB00","error-message": "","orderData": {"variety": "","ordertype": "","ordertag": "","producttype": "","price": 0.0,"triggerprice": 0.0,"quantity": "0","disclosedquantity": "0","duration": "","squareoff": 0.0,"stoploss": 0.0,"trailingstoploss": 0.0,"tradingsymbol": "","transactiontype": "","exchange": "","symboltoken": "","instrumenttype": "","strikeprice": 0.0,"optiontype": "","expirydate": "","lotsize": "0","cancelsize": "0","averageprice": 0.0,"filledshares": "","unfilledshares": "","orderid": "","text": "","status": "","orderstatus": "","updatetime": "","exchtime": "","exchorderupdatetime": "","fillid": "","filltime": "","parentorderid": ""}}
+[I 250701 10:23:42 order_updater_ws:15] {"user-id": "S1143520","status-code": "200","order-status": "AB00","error-message": "","orderData": {"variety": "","ordertype": "","ordertag": "","producttype": "","price": 0.0,"triggerprice": 0.0,"quantity": "0","disclosedquantity": "0","duration": "","squareoff": 0.0,"stoploss": 0.0,"trailingstoploss": 0.0,"tradingsymbol": "","transactiontype": "","exchange": "","symboltoken": "","instrumenttype": "","strikeprice": 0.0,"optiontype": "","expirydate": "","lotsize": "0","cancelsize": "0","averageprice": 0.0,"filledshares": "","unfilledshares": "","orderid": "","text": "","status": "","orderstatus": "","updatetime": "","exchtime": "","exchorderupdatetime": "","fillid": "","filltime": "","parentorderid": ""}}
+[I 250701 10:24:02 order_updater_ws:15] b'\x00'
+[I 250701 10:24:02 order_updater_ws:15] b'\x00'
+[I 250701 10:24:12 order_updater_ws:15] b'\x00'
+[I 250701 10:24:12 order_updater_ws:15] b'\x00'
+[I 250701 10:24:22 order_updater_ws:15] b'\x00'
+[I 250701 10:24:22 order_updater_ws:15] b'\x00'
