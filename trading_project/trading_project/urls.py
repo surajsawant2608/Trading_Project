@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path,include
 from smart_api_integration import views
 from django.contrib.auth.views import LogoutView, LoginView
+# from orders.views import start_order_ws
 
 urlpatterns = [
     path('',views.user_login, name='login'),
@@ -27,5 +28,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),  # Include Django's auth URLs
     path('', include(('smart_api_integration.urls', 'smart_api_integration'), namespace='smart_api_integration')),
     path('', include('market_data.urls')),
+    path("orders/", include("orders.urls")),
     path('accounts/',include('accounts.urls'))
 ]

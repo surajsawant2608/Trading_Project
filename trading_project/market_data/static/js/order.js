@@ -19,25 +19,47 @@ function toggleTargetStopInputs() {
 
 // Call on page load
 document.addEventListener("DOMContentLoaded", toggleTargetStopInputs);
+
 function getTargetAndStop(entry) {
     const useSame = document.getElementById("useSamePercent").checked;
 
     if (useSame) {
         const percent = parseFloat(document.getElementById("percent").value) || 3;
-        const upper = +(entry * (1 + percent / 100)).toFixed(2);
-        const lower = +(entry * (1 - percent / 100)).toFixed(2);
-        return { upper, lower };
+        const decimalPercent = percent / 100;
+        return {
+            targetPercent: decimalPercent,
+            stoplossPercent: decimalPercent
+        };
     } else {
-        const targetPercent = parseFloat(document.getElementById("target-percent").value) || 3;
-        const stoplossPercent = parseFloat(document.getElementById("stoploss-percent").value) || 3;
-        const upper = +(entry * (1 + targetPercent / 100)).toFixed(2);
-        const lower = +(entry * (1 - stoplossPercent / 100)).toFixed(2);
-        return { upper, lower };
+        const targetPercentRaw = parseFloat(document.getElementById("target-percent").value) || 3;
+        const stoplossPercentRaw = parseFloat(document.getElementById("stoploss-percent").value) || 3;
+        return {
+            targetPercent: targetPercentRaw / 100,
+            stoplossPercent: stoplossPercentRaw / 100
+        };
     }
 }
 
 
+//   ############# old get target and stop with no tralling ############
+// function getTargetAndStop(entry) {
+//     const useSame = document.getElementById("useSamePercent").checked;
 
+//     if (useSame) {
+//         const targetPercent = parseFloat(document.getElementById("percent").value) || 3;
+//         const step = +(entry * (1 + percent / 100)).toFixed(2);
+//         const sl = +(entry * (1 - percent / 100)).toFixed(2);
+//         return { targetPercent, sl };
+//     } else {
+//         const targetPercent = parseFloat(document.getElementById("target-percent").value) || 3;
+//         const stoplossPercent = parseFloat(document.getElementById("stoploss-percent").value) || 3;
+//         const step = +(entry * (1 + targetPercent / 100)).toFixed(2);
+//         const sl = +(entry * (1 - stoplossPercent / 100)).toFixed(2);
+//         return { targetPercent, sl };
+//     }
+// }
+let intervalId = null;
+let trackInterval = null;
 
 
 // 🔁 Keeps latest LTP for each token
@@ -106,12 +128,13 @@ async function placeBuyOrder() {
             const get_order_book = await fetch('/get-order-book');
             const order_book = await get_order_book.json();
             // await fetchOrderBook();
-
-            const intervalId = setInterval(async () => {
+            if (intervalId) clearInterval(intervalId); // Clear any existing interval
+            intervalId = setInterval(async () => {
                 console.log("🔄 Polling order book for order ID:", order_id);
                 
                 try {
                     const res = await fetch("/get-order-book");
+                    
                     console.log("📡 Fetched order book response:", res);
             
                     const result = await res.json();
@@ -136,26 +159,32 @@ async function placeBuyOrder() {
                             if (status === "cancelled" || status === "rejected" || status === "AMO")  {
                                 console.warn(`❌ Order has been ${status}. Stopping polling.`);
                                 clearInterval(intervalId);
+                                intervalId = null; // Clear the interval ID
                                 alert(`❌ Order was ${status}.`);
                                 return;
                             }
                             if (status === "complete" && filled > 0 && avgPrice > 0 && txnType === "BUY") {
                                 clearInterval(intervalId);
+                                intervalId = null; 
                                 const symboltoken = matchedOrder.symboltoken;
                                 const tradingsymbol = matchedOrder.tradingsymbol;
 
                                 // ✅ Advanced Exit Logic Start
                                 const entry = avgPrice;
                                 let currentQty = filled;
-                                let sl = entry * 0.97;
+                                const { targetPercent, stoplossPercent } = getTargetAndStop(entry);
+                                // const { step, sl: updatedSl } = getTargetAndStop(entry);
+                            
+                                let sl = entry * (1 - stoplossPercent);
                                 let targetReached = 0;
-                                const step = 0.03; // 3%
+                                const step = targetPercent; 
                                 let stepTarget = entry * (1 + step);
 
                                 
                                 console.log(`🚀 Buy completed. Tracking ${token} | Entry ₹${entry} | Target ₹${stepTarget} | Stop ₹${sl}`);
 
-                                const trackInterval = setInterval(async() => {
+                                if (trackInterval) clearInterval(trackInterval); // Clear any existing tracking interval
+                                trackInterval = setInterval(async() => {
                                     const ltp = window.latestLtpByToken[symboltoken];
                                     if (!ltp) return;
 
@@ -163,6 +192,7 @@ async function placeBuyOrder() {
                                     if (ltp <= sl) {
                                         sendSell(tradingsymbol, symboltoken, currentQty, ltp);
                                         clearInterval(trackInterval);
+                                        trackInterval = null;
                                         console.log(`⛔ STOPLOSS HIT: ₹${ltp}`);
                                     }
 
@@ -177,7 +207,9 @@ async function placeBuyOrder() {
                                             currentQty = 1;
                                             sl = entry;
                                             targetReached++;
-                                            stepTarget = stepTarget * (1 + step);
+                                            // 3% based on entry price
+                                            // stepTarget = stepTarget * (1 + step);
+                                            stepTarget *= (1 + step);
                                             console.log(`✅ 1 lot booked at 3%, SL moved to cost. Target ${stepTarget} next_target ${targetReached}`);
                                         } else if (filled > 2 && targetReached === 0) {
                                             const exitQty = Math.ceil(filled * 0.75);
@@ -185,14 +217,16 @@ async function placeBuyOrder() {
                                             currentQty -= exitQty;
                                             sl = entry;
                                             targetReached++;
-                                            stepTarget = stepTarget * (1 + step);
+                                            // stepTarget = stepTarget * (1 + step);
+                                            stepTarget *= (1 + step);
                                             console.log(`✅ 75% booked, SL moved to cost.Target ${stepTarget} next_target ${targetReached}`);
                                         } else {
                                             // Continue trailing
                                             sl = entry * (1 + step * targetReached);
                                             targetReached++;
-                                            stepTarget = stepTarget * (1 + step);
-                                            console.log(`📈 Trailing SL moved up to ₹${sl} next target ${targetReached}`);
+                                            // stepTarget = stepTarget * (1 + step);
+                                            stepTarget *= (1 + step);
+                                            console.log(`📈 Trailing SL moved up to ₹${sl}, ${stepTarget} next_target`);
                                         }
                                     }
                                 }, 350);
@@ -349,7 +383,7 @@ function updateEntryPrice() {
     const triggerPrice = parseFloat(document.getElementById("triggerPrice").value.trim());
 
     if (!isNaN(triggerPrice)) {
-        const entryPrice = (triggerPrice + 0.2).toFixed(2);
+        const entryPrice = (triggerPrice + 0.4).toFixed(2);
         document.getElementById("entryPrice").textContent = entryPrice;
     } else {
         document.getElementById("entryPrice").textContent = "--";

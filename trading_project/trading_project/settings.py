@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'market_data',
     'accounts',
     'smart_api_integration',
+    'orders',
     'channels',
 
 ]

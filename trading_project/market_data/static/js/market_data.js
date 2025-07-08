@@ -18,6 +18,16 @@ function subscribeTokens(tokens) {
     socket.send(data);
 }
 
+document.addEventListener("DOMContentLoaded", async function () {
+    try {
+        const res = await fetch("/orders/start-order-ws/");
+        const data = await res.json();
+        console.log("📡 Order WebSocket started:", data);
+    } catch (error) {
+        console.error("❌ Failed to start Order WebSocket:", error);
+    }
+});
+
 // Unsubscribe function
 function unsubscribeTokens(tokens) {
     const data = JSON.stringify({ action: "unsubscribe", tokens });
@@ -135,39 +145,6 @@ socket.onmessage = function (event) {
                 symbolCell.innerText = symbol;
             }
         }
-
-
-
-        // // Create or update table row
-        // let row = document.getElementById(`token-${token}`);
-        // const ltp = (marketData.last_traded_price / 100).toFixed(2);
-        // if (!row) {
-        //     row = document.createElement("tr");
-        //     row.id = `token-${token}`;
-        //     row.innerHTML = `
-        //         <td>${token}</td>
-        //         <td class="symbol-cell" style="cursor: pointer;" id="symbol-${token}">${symbol}</td>
-        //         <td class="ltp text-success fw-bold" id="ltp-${token}">
-        //             ${ltp}
-        //         </td>
-        //     `;
-        //     tableBody.appendChild(row);
-        //     tokenRows[token] = row;
-        // } else {
-        //     row.querySelector(`#ltp-${token}`).innerText = ltp;
-        //     const symbolCell = row.querySelector(`#symbol-${token}`);
-        //     if (symbolCell.innerText === "Unknown") {
-        //         symbolCell.innerText = symbol;
-        //     }
-        // }
-
-        // // Update Option Chain
-        // if (symbol !== "Unknown") {
-        //     updateOptionChain(symbol, parseFloat(ltp));
-        // }
-
-
-
 
     } catch (error) {
         console.error("❌ Error parsing JSON:", error);

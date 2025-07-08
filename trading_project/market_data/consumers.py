@@ -47,7 +47,9 @@ class MarketDataConsumer(AsyncWebsocketConsumer):
         if action == "subscribe":
             correlation_id = "abc1234"  
             mode = 1  
-            token_list = [{"exchangeType": 2, "tokens": token}]  # Proper format
+            token_list = [{"exchangeType": 2, "tokens": token}]
+            for t in token:
+                register_token(t)  # Proper format
             self.ws.subscribe(correlation_id, mode, token_list)
 
         elif action == "unsubscribe":
@@ -95,7 +97,7 @@ class MarketDataConsumer(AsyncWebsocketConsumer):
 
         correlation_id = "abc1234"
         mode = 1
-        tokens = ['51011','51009','51007','51019','51013','51017','51019','51015'   ,'50998','51000','51002','50994','50996' ]
+        tokens = ['40047','40049','40051' ,'40048','40046','40041','40050']
         token_list = [{"exchangeType": 2, "tokens": tokens}]
 
         def process_messages():
@@ -119,6 +121,10 @@ class MarketDataConsumer(AsyncWebsocketConsumer):
         def on_data(ws, msg):
             """Handle received data"""
             self.msg_queue.put(msg)
+            try:
+                self.redis_client.publish('ltp_updates', json.dumps(msg))
+            except Exception as e:
+                logger.error(f"Redis publish error: {e}")
 
         def on_error(ws, error):
             """Handle WebSocket error"""
