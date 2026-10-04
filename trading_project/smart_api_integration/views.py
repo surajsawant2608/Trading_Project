@@ -9,6 +9,9 @@ from django.utils import timezone
 from SmartApi import SmartConnect  # Assuming SmartConnect is the API client
 import pyotp
 
+def dashboard_view(request):
+    return render(request, "dashboard.html")
+
 def user_login(request):
     """
     Handle user login with username and passcode.
@@ -76,7 +79,7 @@ def api_details(request):
 
     return render(request, 'api_details.html', {'form': form})
 
-@login_required
+# @login_required
 def check_token_and_dashboard(request):
     """
     Check if the tokens are valid. If expired, reconnect to generate new tokens.
@@ -104,7 +107,7 @@ def check_token_and_dashboard(request):
         messages.error(request, "User credentials not found. Please provide API details.")
         return redirect('smart_api_integration:api_details')
 
-@login_required
+# @login_required
 def reconnect_and_fetch_profile(request):
     """
     Reconnect to the API, generate new tokens, fetch profile, and redirect to dashboard.
@@ -159,7 +162,7 @@ def reconnect_and_fetch_profile(request):
         messages.error(request, f"Error: {str(e)}")
         return redirect('smart_api_integration:api_details')
 
-@login_required
+# @login_required
 def profile(request):
     """
     Display the user profile data on the dashboard.

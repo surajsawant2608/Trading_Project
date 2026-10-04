@@ -1,0 +1,24 @@
+[I 250714 10:51:24 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250714 10:51:24 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250714 10:51:24 smartWebSocketOrderUpdate:38] Connection opened
+[I 250714 10:51:24 smartWebSocketOrderUpdate:38] Connection opened
+[I 250714 10:51:24 order_updater_ws:15] {"user-id": "S1143520","status-code": "200","order-status": "AB00","error-message": "","orderData": {"variety": "","ordertype": "","ordertag": "","producttype": "","price": 0.0,"triggerprice": 0.0,"quantity": "0","disclosedquantity": "0","duration": "","squareoff": 0.0,"stoploss": 0.0,"trailingstoploss": 0.0,"tradingsymbol": "","transactiontype": "","exchange": "","symboltoken": "","instrumenttype": "","strikeprice": 0.0,"optiontype": "","expirydate": "","lotsize": "0","cancelsize": "0","averageprice": 0.0,"filledshares": "","unfilledshares": "","orderid": "","text": "","status": "","orderstatus": "","updatetime": "","exchtime": "","exchorderupdatetime": "","fillid": "","filltime": "","parentorderid": ""}}
+[I 250714 10:51:24 order_updater_ws:15] {"user-id": "S1143520","status-code": "200","order-status": "AB00","error-message": "","orderData": {"variety": "","ordertype": "","ordertag": "","producttype": "","price": 0.0,"triggerprice": 0.0,"quantity": "0","disclosedquantity": "0","duration": "","squareoff": 0.0,"stoploss": 0.0,"trailingstoploss": 0.0,"tradingsymbol": "","transactiontype": "","exchange": "","symboltoken": "","instrumenttype": "","strikeprice": 0.0,"optiontype": "","expirydate": "","lotsize": "0","cancelsize": "0","averageprice": 0.0,"filledshares": "","unfilledshares": "","orderid": "","text": "","status": "","orderstatus": "","updatetime": "","exchtime": "","exchorderupdatetime": "","fillid": "","filltime": "","parentorderid": ""}}
+[W 250714 10:51:26 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[W 250714 10:51:26 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[I 250714 10:51:37 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250714 10:51:37 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250714 10:51:44 order_updater_ws:15] b'\x00'
+[I 250714 10:51:44 order_updater_ws:15] b'\x00'
+[I 250714 10:51:45 smartConnect:124] in pool
+[I 250714 10:51:45 smartConnect:124] in pool
+[I 250714 10:51:58 smartWebSocketOrderUpdate:38] Connection opened
+[I 250714 10:51:58 smartWebSocketOrderUpdate:38] Connection opened
+[I 250714 10:51:58 order_updater_ws:15] {"user-id": "S1245588","status-code": "200","order-status": "AB00","error-message": "","orderData": {"variety": "","ordertype": "","ordertag": "","producttype": "","price": 0.0,"triggerprice": 0.0,"quantity": "0","disclosedquantity": "0","duration": "","squareoff": 0.0,"stoploss": 0.0,"trailingstoploss": 0.0,"tradingsymbol": "","transactiontype": "","exchange": "","symboltoken": "","instrumenttype": "","strikeprice": 0.0,"optiontype": "","expirydate": "","lotsize": "0","cancelsize": "0","averageprice": 0.0,"filledshares": "","unfilledshares": "","orderid": "","text": "","status": "","orderstatus": "","updatetime": "","exchtime": "","exchorderupdatetime": "","fillid": "","filltime": "","parentorderid": ""}}
+[I 250714 10:51:58 order_updater_ws:15] {"user-id": "S1245588","status-code": "200","order-status": "AB00","error-message": "","orderData": {"variety": "","ordertype": "","ordertag": "","producttype": "","price": 0.0,"triggerprice": 0.0,"quantity": "0","disclosedquantity": "0","duration": "","squareoff": 0.0,"stoploss": 0.0,"trailingstoploss": 0.0,"tradingsymbol": "","transactiontype": "","exchange": "","symboltoken": "","instrumenttype": "","strikeprice": 0.0,"optiontype": "","expirydate": "","lotsize": "0","cancelsize": "0","averageprice": 0.0,"filledshares": "","unfilledshares": "","orderid": "","text": "","status": "","orderstatus": "","updatetime": "","exchtime": "","exchorderupdatetime": "","fillid": "","filltime": "","parentorderid": ""}}
+[I 250714 10:51:58 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250714 10:51:58 smartWebSocketV2:129] WebSocket connection established successfully.
+[I 250714 10:52:04 order_updater_ws:15] b'\x00'
+[I 250714 10:52:04 order_updater_ws:15] b'\x00'
+[W 250714 10:52:05 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...
+[W 250714 10:52:05 smartWebSocketV2:324] Attempting to resubscribe/reconnect (Attempt 1)...

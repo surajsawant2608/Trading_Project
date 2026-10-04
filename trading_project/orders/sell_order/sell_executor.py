@@ -42,7 +42,7 @@ def place_order(user_id, symbol, token, quantity, transactiontype="SELL", order_
             "ordertype": order_type,
             "producttype": "INTRADAY",
             "duration": "DAY",
-            "quantity": str(int(quantity) * 75),  # 🧠 Lot size multiplication (make dynamic if needed)
+            "quantity": str(int(quantity) * 65),  # 🧠 Lot size multiplication (make dynamic if needed)
         })
 
         print('📤 Placing Order Payload:', payload)

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Login | TradeDash{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-md p-6 bg-panelbg border border-border rounded-lg shadow-xl">
+    <div class="mb-6 text-center">
+        <h1 class="text-xl font-bold text-white tracking-tight">Sign in to TradeDash</h1>
+        <p class="text-xs text-gray-400 mt-1">Enter your credentials to access the terminal</p>
+    </div>
+
+    <form method="POST" action="{% url 'login' %}" class="space-y-4">
+        {% csrf_token %}
+        
+        {% if form.errors %}
+        <div class="p-3 text-xs text-red-400 bg-red-950/40 border border-red-900 rounded">
+            Invalid username or password. Please try again.
+        </div>
+        {% endif %}
+
+        <div>
+            <label class="block mb-1 text-xs font-medium text-gray-300">Username</label>
+            <input type="text" name="username" required 
+                class="bg-basebg border border-border text-white text-xs rounded block w-full p-2.5 focus:ring-brand focus:border-brand">
+        </div>
+
+        <div>
+            <label class="block mb-1 text-xs font-medium text-gray-300">Password</label>
+            <input type="password" name="password" required 
+                class="bg-basebg border border-border text-white text-xs rounded block w-full p-2.5 focus:ring-brand focus:border-brand">
+        </div>
+
+        <button type="submit" 
+            class="w-full text-black bg-brand hover:bg-green-400 font-semibold rounded text-xs px-4 py-2.5 transition-colors">
+            Sign In
+        </button>
+    </form>
+</div>
+{% endblock %}

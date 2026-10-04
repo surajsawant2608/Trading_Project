@@ -68,7 +68,7 @@ def place_order(request):
                     "exchange":"NFO",
                     "tradingsymbol": symbol,
                     "symboltoken": token,
-                    "quantity": quantity *75,
+                    "quantity": quantity *65,
                     "transactiontype": transactiontype,
                     "ordertype": order_type,
                     "variety": "STOPLOSS",
@@ -89,7 +89,7 @@ def place_order(request):
                     "producttype":"CARRYFORWARD",
                     "duration":"DAY",
                     "price": data.get("triggerprice", 0),
-                    "quantity": quantity *75,
+                    "quantity": quantity *65,
                     })
 
             elif order_type == "MARKET":
@@ -102,7 +102,7 @@ def place_order(request):
                     "ordertype":order_type,
                     "producttype":"CARRYFORWARD",
                     "duration":"DAY",
-                    "quantity": quantity *75,
+                    "quantity": quantity *65,
                 })
             else:   
                 return JsonResponse({"status": "error", "message": "Invalid order type."}, status=400)
@@ -188,6 +188,40 @@ def get_trade_book(request):
 
     try:
         conn.request("GET", "/rest/secure/angelbroking/order/v1/getTradeBook", payload, headers)
+        res = conn.getresponse()
+        data = res.read()
+        json_data = json.loads(data.decode("utf-8"))
+        # print('Trade Book :- ' + json_data)
+        return JsonResponse(json_data, safe=False)
+
+    except Exception as e:
+        return JsonResponse({"status": False, "message": "Error fetching trade book", "error": str(e)})
+
+
+@csrf_exempt
+@login_required
+def get_rms(request):
+    # Fetch the logged-in user's credentials and tokens
+    user_cred = UserApiCredentials.objects.get(user=request.user)
+    user_tokens = UserApiTokens.objects.get(user=request.user)
+
+    conn = http.client.HTTPSConnection("apiconnect.angelone.in")
+    payload = ""
+
+    headers = {
+        'Authorization': user_tokens.jwt_token,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-UserType': 'USER',
+        'X-SourceID': 'WEB',
+        'X-ClientLocalIP': '127.0.0.1',
+        'X-ClientPublicIP': '123.123.123.123',
+        'X-MACAddress': '00:0a:95:9d:68:16',
+        'X-PrivateKey': user_cred.api_key,
+    }
+
+    try:
+        conn.request("GET", "https://apiconnect.angelone.in/rest/secure/angelbroking/user/v1/getRMS", payload, headers)
         res = conn.getresponse()
         data = res.read()
         json_data = json.loads(data.decode("utf-8"))

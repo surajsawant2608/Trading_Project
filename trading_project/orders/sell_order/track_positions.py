@@ -42,8 +42,8 @@ def handle_order_update(user_id,message):
     token = order_data.get("symboltoken")
     quantity = int(order_data.get("quantity")) // 75
     avg_price = float(order_data.get("averageprice"))
+    target = avg_price + ((5/100) * avg_price)
     sl = avg_price - ((3/100) * avg_price)
-    target = avg_price + ((3/100) * avg_price)
     order_stack = [sl,avg_price,target]
     print(f"[🟢 New Position] {symbol} {token} | Stack: {order_stack} | Qty: {quantity}")
 

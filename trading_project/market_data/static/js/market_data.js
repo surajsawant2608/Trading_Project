@@ -62,10 +62,10 @@ unsubscribeForm.addEventListener("submit", function (event) {
 // Load token-symbol mappings
 async function loadTokenMappings() {
     try {
-        const response = await fetch("/static/OpenAPIScripMaster13062025.json");
+        const response = await fetch("/static/OpenAPIScripMaster020226.json");
         const data = await response.json();
         data.forEach(item => {
-            tokenSymbolMap[item.token] = item.symbol;
+            tokenSymbolMap[String(item.token)] = item.symbol;
         });
         console.log("✅ Token-Symbol Mapping Loaded:", tokenSymbolMap);
     } catch (error) {

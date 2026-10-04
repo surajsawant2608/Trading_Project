@@ -147,7 +147,7 @@ async function placeBuyOrder() {
                         console.log("✅ Matched Order Found:", matchedOrder);
                         if (matchedOrder) {
                             const status = matchedOrder.status.toLowerCase();
-                            const filled = (parseInt(matchedOrder.filledshares))/75;
+                            const filled = (parseInt(matchedOrder.filledshares))/65;
                             const avgPrice = parseFloat(matchedOrder.averageprice);
                             const txnType = matchedOrder.transactiontype;
             
@@ -468,8 +468,11 @@ async function fetchOrderBook() {
 async function fetchTradeBook() {
     try {
         const response = await fetch('/get-trade-book');
-        const data = await response.json();
+        const get_rms = await fetch('/get-rms');
 
+        const data = await response.json();
+        const rmsData = await get_rms.json();``
+        console.log(" Rms Data:", rmsData);
         console.log("📘 Trade Book:", data); // Debugging output
 
         const tableBody = document.getElementById('tradeBookTable');

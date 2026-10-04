@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_REDIRECT_URL = '/dashboard/' 
+# LOGIN_REDIRECT_URL = '/' 
 
 
 
@@ -67,10 +67,10 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'trading_project/templates'),
-            os.path.join(BASE_DIR, 'smart_api_integration/templates'), 
-            os.path.join(BASE_DIR, 'market_data/templates')
+            BASE_DIR / 'templates',
+            # os.path.join(BASE_DIR, 'trading_project/templates'),
+            # os.path.join(BASE_DIR, 'smart_api_integration/templates'), 
+            # os.path.join(BASE_DIR, 'market_data/templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
