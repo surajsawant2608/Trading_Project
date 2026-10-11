@@ -1,8 +1,418 @@
+
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="p-6">
-    <h1 class="text-white text-2xl font-bold">Terminal Online</h1>
-    <p class="text-gray-400 text-sm mt-2">Daphne and Tailwind Base Shell are rendering correctly.</p>
+<!-- Dashboard Workspace Container -->
+<div class="flex-1 h-full overflow-y-auto bg-[#000000] p-2 scrollbar-thin scrollbar-thumb-[#282d35]">
+    
+    <!-- Main CSS Grid: 12 Columns for precise sizing -->
+    <div class="grid grid-cols-1 xl:grid-cols-12 gap-4 max-w-[1600px] mx-auto pb-12">
+
+        <!-- ============================================================== -->
+        <!-- CARD 1: MY PORTFOLIO (Spans 7 Columns)                         -->
+        <!-- ============================================================== -->
+        <div class=" col-span-1 xl:col-span-12 bg-[#111111] border border-[#242424] rounded-md p-4 flex flex-col justify-between shadow-sm">
+            
+            <!-- Header & Asset Tabs -->
+            <div class="flex justify-between items-center mb-5">
+                <div class="flex items-center gap-3">
+                    <h2 class="text-white font-semibold text-base tracking-wide">My Portfolio</h2>
+                    <div class="flex text-white items-center gap-1.5 text-sm font-medium">
+                        <button class="bg-[#05b878]/10 text-[#05b878] border border-[#05b878] px-2.5 py-0.5 rounded-sm">All</button>
+                        <button class="text-gray-400 hover:text-white border border-[#2d333b] hover:border-gray-500 px-2.5 py-0.5 rounded-sm transition-colors">Stocks</button>
+                        <button class="text-gray-400 hover:text-white border border-[#2d333b] hover:border-gray-500 px-2.5 py-0.5 rounded-sm transition-colors">Mutual Fund</button>
+                        <button class="text-gray-400 hover:text-white border border-[#2d333b] hover:border-gray-500 px-2.5 py-0.5 rounded-sm transition-colors">ETFs</button>
+                    </div>
+                </div>
+                <!-- Filter Icons -->
+                <div class="flex items-center gap-2 text-gray-500">
+                    <button class="hover:text-amber-500 transition-colors"><i data-lucide="box" class="w-4 h-4"></i></button>
+                    <button class="hover:text-amber-500 transition-colors"><i data-lucide="shield-check" class="w-4 h-4"></i></button>
+                </div>
+            </div>
+            
+            <!-- Metrics Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-5 tabular-nums">
+                <div>
+                    <span class="text-white-400 block mb-1 text-xm">Investment</span>
+                    <span class="text-white font-semibold text-sm">₹ 0.00</span>
+                </div>
+                <div>
+                    <span class="text-white-400 block mb-1 text-xm">Current Value</span>
+                    <span class="text-white font-semibold text-sm">₹ 0.00</span>
+                </div>
+                <div>
+                    <span class="text-white-400 block mb-1 text-xm">Overall Profits</span>
+                    <span class="text-white-300 font-semibold text-sm">₹ 0.00 <span class="text-gray-500 font-normal text-[11px]">(0.00%)</span></span>
+                </div>
+                <div class="relative">
+                    <span class="text-white-400 block mb-1 text-xm">Today's Profit</span>
+                    <span class="text-white-300 font-semibold text-sm">₹ 0.00 <span class="text-gray-500 font-normal text-[11px]">(0.00%)</span></span>
+                    <button class="absolute top-0 right-0 text-gray-500 hover:text-white"><i data-lucide="eye" class="w-3.5 h-3.5"></i></button>
+                </div>
+            </div>
+
+            <!-- Footer: P&L, Margin, Top Up -->
+            <div class="pt-3 border-t border-[#1f2428] flex flex-wrap justify-between items-center text-xs gap-y-3">
+                <div class="flex items-center gap-6">
+                    <span class="text-white-400">Today's P&L: <span class="text-[#05b878] font-semibold tracking-wide">₹ 6,964.75</span></span>
+                    <span class="text-white-400">Open Positions: <span class="text-white font-semibold">0</span> <i data-lucide="chevron-right" class="inline w-3 h-3 cursor-pointer hover:text-white"></i></span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-white-400">Margin Available: <span class="text-white font-semibold">₹ 27,498.02</span></span>
+                    <div class="flex items-center bg-[#000000] border border-[#2d333b] rounded-sm overflow-hidden">
+                        <span class="px-2 text-white text-[11px] font-mono">₹ 50,000.00</span>
+                        <button class="bg-[#05b878] hover:bg-[#049d66] text-black font-semibold text-[11px] px-3 py-1.5 transition-colors border-l border-[#2d333b] flex items-center gap-1">
+                            <i data-lucide="plus" class="w-3 h-3"></i> Top Up
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============================================================== -->
+        <!-- CARD 2: INVEST / TRADE ON EXCHANGES (Spans 5 Columns)          -->
+        <!-- ============================================================== -->
+        <div class="xl:col-span-5 bg-[#111111] border border-[#242424] rounded-md p-4 shadow-sm flex flex-col">
+            <h2 class="text-white font-semibold text-sm tracking-wide mb-4">Invest / Trade on Stock Exchanges</h2>
+            
+            <!-- Asset Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-y-5 gap-x-2 mb-6">
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <div class="w-6 h-6 rounded-full bg-blue-900/30 flex items-center justify-center border border-blue-800/40 group-hover:border-blue-500 transition-colors">
+                        <i data-lucide="pie-chart" class="w-3.5 h-3.5 text-blue-400"></i>
+                    </div>
+                    <span class="text-gray-300 text-xs font-medium group-hover:text-white transition-colors">Equities</span>
+                </a>
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <div class="w-6 h-6 rounded-full bg-green-900/30 flex items-center justify-center border border-green-800/40 group-hover:border-green-500 transition-colors">
+                        <i data-lucide="leaf" class="w-3.5 h-3.5 text-green-400"></i>
+                    </div>
+                    <span class="text-gray-300 text-xs font-medium group-hover:text-white transition-colors">Mutual Funds</span>
+                </a>
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <div class="w-6 h-6 rounded-full bg-yellow-900/30 flex items-center justify-center border border-yellow-800/40 group-hover:border-yellow-500 transition-colors">
+                        <i data-lucide="bar-chart-2" class="w-3.5 h-3.5 text-yellow-400"></i>
+                    </div>
+                    <span class="text-gray-300 text-xs font-medium group-hover:text-white transition-colors">ETFs</span>
+                </a>
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <div class="w-6 h-6 rounded-full bg-purple-900/30 flex items-center justify-center border border-purple-800/40 group-hover:border-purple-500 transition-colors">
+                        <i data-lucide="layers" class="w-3.5 h-3.5 text-purple-400"></i>
+                    </div>
+                    <span class="text-gray-300 text-xs font-medium group-hover:text-white transition-colors">Options</span>
+                </a>
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <div class="w-6 h-6 rounded-full bg-orange-900/30 flex items-center justify-center border border-orange-800/40 group-hover:border-orange-500 transition-colors">
+                        <i data-lucide="calendar" class="w-3.5 h-3.5 text-orange-400"></i>
+                    </div>
+                    <span class="text-gray-300 text-xs font-medium group-hover:text-white transition-colors">Futures</span>
+                </a>
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <div class="w-6 h-6 rounded-full bg-amber-900/30 flex items-center justify-center border border-amber-800/40 group-hover:border-amber-500 transition-colors">
+                        <i data-lucide="coins" class="w-3.5 h-3.5 text-amber-400"></i>
+                    </div>
+                    <span class="text-gray-300 text-xs font-medium group-hover:text-white transition-colors">Commodities</span>
+                </a>
+            </div>
+
+            <!-- Banners -->
+            <div class="space-y-2 mt-auto">
+                <a href="#" class="flex justify-between items-center p-2.5 bg-[#0a0a0a] border border-[#1f2428] rounded-sm hover:border-[#363636] transition-colors">
+                    <div class="flex items-center gap-2.5">
+                        <i data-lucide="file-text" class="w-4 h-4 text-emerald-500"></i>
+                        <span class="text-white text-xs font-medium">Rent Stocks <span class="text-gray-500 font-normal ml-1 text-[11px]">Earn upto 18% pa with SLBM</span></span>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-gray-500"></i>
+                </a>
+                <a href="#" class="flex justify-between items-center p-2.5 bg-[#0a0a0a] border border-[#1f2428] rounded-sm hover:border-[#363636] transition-colors">
+                    <div class="flex items-center gap-2.5">
+                        <i data-lucide="box" class="w-4 h-4 text-yellow-500"></i>
+                        <span class="text-white text-xs font-medium">Gold Vault <span class="text-gray-500 font-normal ml-1 text-[11px]">Buy 99.9% pure Gold and Silver</span></span>
+                        <span class="bg-amber-500 text-black text-[9px] px-1.5 rounded-sm font-bold ml-1">New</span>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-gray-500"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- CARD 3: TRENDING STOCKS                                        -->
+        <!-- ============================================================== -->
+        <div class="xl:col-span-7 bg-[#111111] border border-[#242424] rounded-md p-4 shadow-sm flex flex-col justify-between">
+            <div>
+                <h2 class="text-white font-semibold text-sm tracking-wide mb-3">Trending Stocks</h2>
+                
+                <!-- Sorting Tabs (HTMX Swapped) -->
+                <div class="flex overflow-x-auto scrollbar-hide gap-1.5 mb-4 text-sm font-medium" id="trending-tabs">
+                    <button type="button"
+                            class="trending-tab active border border-[#05b878] text-[#05b878] bg-[#05b878]/10 px-3 py-1 rounded-sm whitespace-nowrap transition-colors"
+                            hx-get="/api/trending-stocks/?filter=news""
+                            hx-target="#trending-list"
+                            onclick="switchTrendingTab(this)">
+                        Stocks in News
+                    </button>
+                    <button type="button"
+                            class="trending-tab border border-[#2d333b] text-gray-400 hover:text-white hover:border-gray-500 px-3 py-1 rounded-sm whitespace-nowrap transition-colors"
+                            hx-get="/api/trending-stocks/??filter=traded"
+                            hx-target="#trending-list"
+                            onclick="switchTrendingTab(this)">
+                        Most Traded
+                    </button>
+                    <button type="button"
+                            class="trending-tab border border-[#2d333b] text-gray-400 hover:text-white hover:border-gray-500 px-3 py-1 rounded-sm whitespace-nowrap transition-colors"
+                            hx-get="/api/trending-stocks/??filter=bought_mtf"
+                            hx-target="#trending-list"
+                            onclick="switchTrendingTab(this)">
+                        Most Bought MTF
+                    </button>
+                    <button type="button"
+                            class="trending-tab border border-[#2d333b] text-gray-400 hover:text-white hover:border-gray-500 px-3 py-1 rounded-sm whitespace-nowrap transition-colors"
+                            hx-get="/api/trending-stocks/??filter=invested"
+                            hx-target="#trending-list"
+                            onclick="switchTrendingTab(this)">
+                        Most Invested
+                    </button>
+                    <button type="button"
+                            class="trending-tab border border-[#2d333b] text-gray-400 hover:text-white hover:border-gray-500 px-3 py-1 rounded-sm whitespace-nowrap transition-colors"
+                            hx-get="/api/trending-stocks/??filter=searched"
+                            hx-target="#trending-list"
+                            onclick="switchTrendingTab(this)">
+                        Most Searched
+                    </button>
+                </div>
+
+                <!-- Target Container: Initial Content -->
+                <div id="trending-list" class="space-y-1.5">
+                    {% include "components/partials/trending_stocks_list.html" with stocks=initial_trending_stocks %}
+                </div>
+            </div>
+
+            <!-- Card Footer -->
+            <div class="text-right mt-3 pt-2 border-t border-[#1f2428]">
+                <a href="#all-stocks" class="text-gray-400 hover:text-white text-xxs transition-colors inline-flex items-center gap-1 font-mono">
+                    view all stocks <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+
+        <script>
+        function switchTrendingTab(activeBtn) {
+            document.querySelectorAll('#trending-tabs .trending-tab').forEach(btn => {
+                btn.className = "trending-tab border border-[#2d333b] text-gray-400 hover:text-white hover:border-gray-500 px-3 py-1 rounded-sm whitespace-nowrap transition-colors";
+            });
+            activeBtn.className = "trending-tab active border border-[#05b878] text-[#05b878] bg-[#05b878]/10 px-3 py-1 rounded-sm whitespace-nowrap transition-colors";
+        }
+        </script>
+        <!-- ============================================================== -->
+        <!-- CARD: KEY INDICES & COMMODITIES (Spans 7 Columns)              -->
+        <!-- ============================================================== -->
+        <div class="xl:col-span-7 bg-[#111111] border border-[#242424] rounded-md p-4 shadow-sm flex flex-col">
+            <h2 class="text-white font-semibold text-sm tracking-wide mb-4">Key Indices & Commodities</h2>
+            
+            <!-- 3-Column Data Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                
+                <!-- Card 1: Nifty 50 -->
+                <div class="p-2.5 bg-[#000000] border border-[#1f2428] rounded-sm hover:border-[#363636] transition-colors cursor-pointer group">
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="text-gray-200 text-xs font-medium group-hover:text-white transition-colors">Nifty 50</span>
+                        <span class="bg-amber-500 text-black text-[9px] font-bold px-1.5 py-0.5 rounded-sm">Expiry Today</span>
+                    </div>
+                    <div class="tabular-nums font-mono">
+                        <span class="text-white font-semibold text-sm">22,776.10</span>
+                        <span class="text-[#05b878] text-[11px] ml-1">+220.35 (0.98%)</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Nifty Bank -->
+                <div class="p-2.5 bg-[#000000] border border-[#1f2428] rounded-sm hover:border-[#363636] transition-colors cursor-pointer group">
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="text-gray-200 text-xs font-medium group-hover:text-white transition-colors">Nifty Bank</span>
+                    </div>
+                    <div class="tabular-nums font-mono">
+                        <span class="text-white font-semibold text-sm">55,128.40</span>
+                        <span class="text-[#05b878] text-[11px] ml-1">+414.30 (0.76%)</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Finnifty -->
+                <div class="p-2.5 bg-[#000000] border border-[#1f2428] rounded-sm hover:border-[#363636] transition-colors cursor-pointer group">
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="text-gray-200 text-xs font-medium group-hover:text-white transition-colors">Finnifty</span>
+                    </div>
+                    <div class="tabular-nums font-mono">
+                        <span class="text-white font-semibold text-sm">24,946.05</span>
+                        <span class="text-[#05b878] text-[11px] ml-1">+289.65 (1.17%)</span>
+                    </div>
+                </div>
+
+                <!-- Card 4: Nifty Midcap Select -->
+                <div class="p-2.5 bg-[#000000] border border-[#1f2428] rounded-sm hover:border-[#363636] transition-colors cursor-pointer group">
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="text-gray-200 text-xs font-medium group-hover:text-white transition-colors">Nifty Midcap Select</span>
+                    </div>
+                    <div class="tabular-nums font-mono">
+                        <span class="text-white font-semibold text-sm">13,826.00</span>
+                        <span class="text-[#05b878] text-[11px] ml-1">+176.70 (1.29%)</span>
+                    </div>
+                </div>
+
+                <!-- Card 5: Sensex -->
+                <div class="p-2.5 bg-[#000000] border border-[#1f2428] rounded-sm hover:border-[#363636] transition-colors cursor-pointer group">
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="text-gray-200 text-xs font-medium group-hover:text-white transition-colors">Sensex</span>
+                    </div>
+                    <div class="tabular-nums font-mono">
+                        <span class="text-white font-semibold text-sm">73,067.81</span>
+                        <span class="text-[#05b878] text-[11px] ml-1">+685.34 (0.95%)</span>
+                    </div>
+                </div>
+
+                <!-- Card 6: BSE BANKEX -->
+                <div class="p-2.5 bg-[#000000] border border-[#1f2428] rounded-sm hover:border-[#363636] transition-colors cursor-pointer group">
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="text-gray-200 text-xs font-medium group-hover:text-white transition-colors">BSE BANKEX</span>
+                    </div>
+                    <div class="tabular-nums font-mono">
+                        <span class="text-white font-semibold text-sm">62,118.34</span>
+                        <span class="text-[#05b878] text-[11px] ml-1">+329.82 (0.53%)</span>
+                    </div>
+                </div>
+
+                <!-- Card 7: CRUDEOILM OCT FUT -->
+                <div class="p-2.5 bg-[#000000] border border-[#1f2428] rounded-sm hover:border-[#363636] transition-colors cursor-pointer group">
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="text-gray-200 text-xs font-medium uppercase group-hover:text-white transition-colors">Crudeoilm Oct Fut</span>
+                    </div>
+                    <div class="tabular-nums font-mono">
+                        <span class="text-white font-semibold text-sm">8,457.00</span>
+                        <span class="text-[#e15858] text-[11px] ml-1">-212.00 (-2.45%)</span>
+                    </div>
+                </div>
+
+                <!-- Card 8: CRUDEOIL OCT FUT -->
+                <div class="p-2.5 bg-[#000000] border border-[#1f2428] rounded-sm hover:border-[#363636] transition-colors cursor-pointer group">
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="text-gray-200 text-xs font-medium uppercase group-hover:text-white transition-colors">Crudeoil Oct Fut</span>
+                    </div>
+                    <div class="tabular-nums font-mono">
+                        <span class="text-white font-semibold text-sm">8,454.00</span>
+                        <span class="text-[#e15858] text-[11px] ml-1">-215.00 (-2.48%)</span>
+                    </div>
+                </div>
+
+                <!-- Card 9: NATURALGASM OCT FUT -->
+                <div class="p-2.5 bg-[#000000] border border-[#1f2428] rounded-sm hover:border-[#363636] transition-colors cursor-pointer group">
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="text-gray-200 text-xs font-medium uppercase group-hover:text-white transition-colors">Naturalgasm Oct Fut</span>
+                    </div>
+                    <div class="tabular-nums font-mono">
+                        <span class="text-white font-semibold text-sm">297.60</span>
+                        <span class="text-[#05b878] text-[11px] ml-1">+2.30 (0.78%)</span>
+                    </div>
+                </div>
+
+                <!-- Card 10: NATURALGAS OCT FUT -->
+                <div class="p-2.5 bg-[#000000] border border-[#1f2428] rounded-sm hover:border-[#363636] transition-colors cursor-pointer group">
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="text-gray-200 text-xs font-medium uppercase group-hover:text-white transition-colors">Naturalgas Oct Fut</span>
+                    </div>
+                    <div class="tabular-nums font-mono">
+                        <span class="text-white font-semibold text-sm">297.60</span>
+                        <span class="text-[#05b878] text-[11px] ml-1">+2.50 (0.85%)</span>
+                    </div>
+                </div>
+
+                <!-- Card 11: GOLDM NOV FUT -->
+                <div class="p-2.5 bg-[#000000] border border-[#1f2428] rounded-sm hover:border-[#363636] transition-colors cursor-pointer group">
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="text-gray-200 text-xs font-medium uppercase group-hover:text-white transition-colors">Goldm Nov Fut</span>
+                    </div>
+                    <div class="tabular-nums font-mono">
+                        <span class="text-white font-semibold text-sm">1,48,700.00</span>
+                        <span class="text-[#05b878] text-[11px] ml-1">+540.00 (0.36%)</span>
+                    </div>
+                </div>
+
+                <!-- Card 12: SILVERM NOV FUT -->
+                <div class="p-2.5 bg-[#000000] border border-[#1f2428] rounded-sm hover:border-[#363636] transition-colors cursor-pointer group">
+                    <div class="flex justify-between items-start mb-1">
+                        <span class="text-gray-200 text-xs font-medium uppercase group-hover:text-white transition-colors">Silverm Nov Fut</span>
+                    </div>
+                    <div class="tabular-nums font-mono">
+                        <span class="text-white font-semibold text-sm">2,28,748.00</span>
+                        <span class="text-[#05b878] text-[11px] ml-1">+571.00 (0.25%)</span>
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- Footer Action -->
+            <div class="text-right mt-3 pt-3 border-t border-[#1f2428]">
+                <a href="#all-indices" class="text-amber-500 hover:text-amber-400 text-[11px] font-medium transition-colors flex items-center gap-1 justify-end">
+                    view all Indices <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                </a>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- CARD 4: MARKET MOVERS (Spans 5 Columns)                        -->
+        <!-- ============================================================== -->
+        <div class="xl:col-span-5 bg-[#111111] border border-[#242424] rounded-md p-4 shadow-sm flex flex-col">
+            <h2 class="text-white font-semibold text-sm tracking-wide mb-4">Market Movers</h2>
+            
+            <!-- HTMX Sorting Tabs[cite: 8] -->
+            <div class="flex gap-1.5 mb-4 text-[11px] font-medium">
+                <button class="border border-[#05b878] text-[#05b878] bg-[#05b878]/10 px-3 py-1 rounded-sm flex items-center gap-1.5"
+                        hx-get="{% url 'api_market_movers' %}?type=gainers" hx-target="#movers-list">
+                    <i data-lucide="trending-up" class="w-3 h-3"></i> Gainers
+                </button>
+                <button class="border border-[#2d333b] text-gray-400 hover:text-white hover:border-gray-500 px-3 py-1 rounded-sm flex items-center gap-1.5 transition-colors"
+                        hx-get="{% url 'api_market_movers' %}?type=losers" hx-target="#movers-list">
+                    <i data-lucide="trending-down" class="w-3 h-3"></i> Losers
+                </button>
+                <button class="border border-[#2d333b] text-gray-400 hover:text-white hover:border-gray-500 px-3 py-1 rounded-sm flex items-center gap-1.5 transition-colors"
+                        hx-get="{% url 'api_market_movers' %}?type=volume" hx-target="#movers-list">
+                    <i data-lucide="bar-chart-2" class="w-3 h-3"></i> Top Volume
+                </button>
+            </div>
+
+            <!-- Data List -->
+            <div id="movers-list" class="space-y-0 text-xs flex-1">
+                <div class="flex justify-between items-center py-2.5 border-b border-[#1f2428] hover:bg-[#181818] -mx-2 px-2 rounded-sm transition-colors cursor-pointer group">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-5 h-5 rounded-full bg-white text-black flex items-center justify-center font-bold text-[9px]">O</div>
+                        <span class="text-gray-200 font-medium group-hover:text-white">Orient Cables</span>
+                    </div>
+                    <span class="text-gray-300 tabular-nums">405.00 <span class="text-[#05b878] ml-1">+133.00 (48.90%) <i data-lucide="arrow-up-right" class="inline w-3 h-3"></i></span></span>
+                </div>
+
+                <div class="flex justify-between items-center py-2.5 border-b border-[#1f2428] hover:bg-[#181818] -mx-2 px-2 rounded-sm transition-colors cursor-pointer group">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-5 h-5 rounded-full bg-red-800 text-white flex items-center justify-center font-bold text-[9px]">S</div>
+                        <span class="text-gray-200 font-medium group-hover:text-white">Sharp Chucks & Mach..</span>
+                    </div>
+                    <span class="text-gray-300 tabular-nums">100.20 <span class="text-[#05b878] ml-1">+16.70 (20.00%) <i data-lucide="arrow-up-right" class="inline w-3 h-3"></i></span></span>
+                </div>
+
+                <div class="flex justify-between items-center py-2.5 border-b border-[#1f2428] hover:bg-[#181818] -mx-2 px-2 rounded-sm transition-colors cursor-pointer group">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-5 h-5 rounded-full bg-blue-800 text-white flex items-center justify-center font-bold text-[9px]">H</div>
+                        <span class="text-gray-200 font-medium group-hover:text-white">HB Estate Developers</span>
+                    </div>
+                    <span class="text-gray-300 tabular-nums">78.13 <span class="text-[#05b878] ml-1">+13.02 (20.00%) <i data-lucide="arrow-up-right" class="inline w-3 h-3"></i></span></span>
+                </div>
+            </div>
+
+            <!-- Footer Action -->
+            <div class="text-right mt-3">
+                <button class="text-amber-500 hover:text-amber-400 text-[11px] font-medium transition-colors flex items-center gap-1 ml-auto">
+                    view all <i data-lucide="chevron-right" class="w-3 h-3"></i>
+                </button>
+            </div>
+        </div>
+
+    </div>
 </div>
+
 {% endblock %}
