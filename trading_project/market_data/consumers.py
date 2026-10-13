@@ -19,7 +19,7 @@ SCRIP_MASTER = {}
 
 try:
     with open(
-        "/home/suraj/Suraj/Django/Trading_Project/trading_project/market_data/static/OpenAPIScripMaster020226.json"
+        "/home/suraj/Suraj/Django/Trading_Project/trading_project/market_data/static/OpenAPIScripMaster.json"
     ) as f:
         for item in json.load(f):
             SCRIP_MASTER[item["token"]] = item

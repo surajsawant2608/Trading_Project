@@ -364,15 +364,15 @@
             <!-- HTMX Sorting Tabs[cite: 8] -->
             <div class="flex gap-1.5 mb-4 text-[11px] font-medium">
                 <button class="border border-[#05b878] text-[#05b878] bg-[#05b878]/10 px-3 py-1 rounded-sm flex items-center gap-1.5"
-                        hx-get="{% url 'api_market_movers' %}?type=gainers" hx-target="#movers-list">
+                        hx-get="market/api_market_movers/?type=gainers" hx-target="#movers-list">
                     <i data-lucide="trending-up" class="w-3 h-3"></i> Gainers
                 </button>
                 <button class="border border-[#2d333b] text-gray-400 hover:text-white hover:border-gray-500 px-3 py-1 rounded-sm flex items-center gap-1.5 transition-colors"
-                        hx-get="{% url 'api_market_movers' %}?type=losers" hx-target="#movers-list">
+                        hx-get="market/api_market_movers/?type=losers" hx-target="#movers-list">
                     <i data-lucide="trending-down" class="w-3 h-3"></i> Losers
                 </button>
                 <button class="border border-[#2d333b] text-gray-400 hover:text-white hover:border-gray-500 px-3 py-1 rounded-sm flex items-center gap-1.5 transition-colors"
-                        hx-get="{% url 'api_market_movers' %}?type=volume" hx-target="#movers-list">
+                        hx-get="market/api_market_movers/?type=volume" hx-target="#movers-list">
                     <i data-lucide="bar-chart-2" class="w-3 h-3"></i> Top Volume
                 </button>
             </div>

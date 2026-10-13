@@ -95,8 +95,6 @@
                             <li>
                                 <!-- Updated FO link -->
                                 <a href="/market/fo-stocks" 
-                                hx-get="/market/fo-stocks" 
-                                hx-target="#main-workspace" 
                                 class="block px-4 py-2.5 hover:bg-[#1a1a1a] hover:text-white transition-colors">
                                     FO
                                 </a>
@@ -131,13 +129,15 @@
 
     <!-- Main Layout: Sidebar + Workspace -->
     <div class="flex flex-1 overflow-hidden">
-        
+
+        {% block left_panel %}
         <!-- FIX 1: Width adjusted to w-[340px] lg:w-[360px] to match left_panel.html exactly -->
         <aside class="w-[340px] lg:w-[360px] bg-panelbg border-r border-border flex-shrink-0 flex flex-col z-10">
             {% block sidebar %}
             {% include "components/left_panel.html" %}
             {% endblock %}
         </aside>
+        {% endblock left_panel %}
 
         <!-- FIX 2: overflow-y-auto changed to overflow-auto to allow dashboard/option chain to scroll horizontally if needed -->
         <main id="main-workspace" class="flex-1 bg-basebg overflow-auto p-3 relative">

@@ -8,5 +8,6 @@ urlpatterns = [
     path('', market_data_page, name='dashboard'),
     path('market/', include('market_data.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('smart-api/', include('smart_api_integration.urls')),
     
 ]

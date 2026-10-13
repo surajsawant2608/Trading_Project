@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from smart_api_integration.models import UserApiCredentials, UserApiTokens
+from smart_api_integration.utils import SmartApiClientFactory
+from django.utils import timezone
+from django.urls import reverse
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -9,6 +12,72 @@ from django.conf import settings
 import os, csv
 
 
+# ============================================================
+# SYMBOL-INDEXED SCRIP MASTER (LOAD ONCE)
+# ============================================================
+SYMBOL_MASTER = {}
+
+try:
+    with open("/home/suraj/Suraj/Django/Trading_Project/trading_project/market_data/static/OpenAPIScripMaster.json") as f:
+        for item in json.load(f):
+            # Index by symbol (e.g., 'SBIN-EQ') for fast lookup
+            SYMBOL_MASTER[item["symbol"]] = item
+except Exception as e:
+    print(f"Failed to load Scrip Master for Quotes: {e}")
+
+
+# ============================================================
+# MARKET QUOTE API
+# ============================================================
+@csrf_exempt
+def get_market_quote(request):
+    if request.method != "GET":
+        return JsonResponse({"status": False, "message": "Method not allowed"}, status=405)
+
+    if not request.user.is_authenticated:
+        return JsonResponse({"status": False, "message": "Unauthenticated"}, status=401)
+
+    # 1. Obtain an authenticated client via the gateway
+    try:
+        smart_client = SmartApiClientFactory.get_client(request.user)
+    except PermissionError as e:
+        return JsonResponse({"status": False, "message": str(e), "redirect_url": "/smart-api/api-details/"}, status=403)
+    except Exception as e:
+        return JsonResponse({"status": False, "message": f"Auth error: {str(e)}"}, status=500)
+
+    # 2. Parse & resolve exchange tokens
+    symbols_param = request.GET.get("symbols", "")
+    if not symbols_param:
+        return JsonResponse({"status": False, "message": "Missing symbols parameter"}, status=400)
+
+    requested_symbols = [s.strip() for s in symbols_param.split(",") if s.strip()][:50]
+    exchange_tokens = {}
+
+    for sym in requested_symbols:
+        scrip = SYMBOL_MASTER.get(sym)
+        if scrip:
+            exch = scrip.get("exch_seg", "NSE")
+            token = str(scrip.get("token")).strip()
+            if exch not in exchange_tokens:
+                exchange_tokens[exch] = []
+            exchange_tokens[exch].append(token)
+
+    if not exchange_tokens:
+        return JsonResponse({"status": False, "message": "No symbols resolved."}, status=404)
+
+    # 3. Call endpoint directly using smart_client
+    try:
+        data = smart_client.getMarketData(mode="FULL", exchangeTokens=exchange_tokens)
+
+        # Self-healing check: if broker reports invalid token, flag in DB for next request
+        if data and data.get("errorCode") in ["AG8001", "AB8050", "AB8051"]:
+            SmartApiClientFactory.flag_token_failed(request.user)
+            return JsonResponse({"status": False, "message": "Session invalidated, re-trying..."}, status=401)
+
+        return JsonResponse(data, safe=False)
+
+    except Exception as e:
+        return JsonResponse({"status": False, "message": f"Quote fetch error: {str(e)}"}, status=500)
 # @login_required
 def market_data_page(request):
     """ Render the market data page where WebSocket will connect. """
@@ -18,7 +87,8 @@ def fo_stocks_view(request):
     stocks = []
     
     # Ensure FO_STOCK_LIST.txt is placed in a known directory, e.g., your app's static folder or root.
-    file_path = os.path.join(settings.BASE_DIR, 'FO_STOCK_LIST.txt')
+    file_path = os.path.join(settings.BASE_DIR, 'static/FO_STOCK_LIST.txt')
+    print(file_path)
     
     try:
         with open(file_path, 'r') as f:
@@ -50,7 +120,7 @@ def fo_stocks_view(request):
     if request.headers.get('HX-Request'):
         return render(request, "fo_stocks_content.html", context)
         
-    return render(request, "fo_stocks.html", context)
+    return render(request, "fo_stocks_content.html", context)
 
 def option_chain_page(request):
     spot_price = 22776.10

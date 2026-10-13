@@ -59,6 +59,12 @@ unsubscribeForm.addEventListener("submit", function (event) {
     }
 });
 
+
+// Example: Poll 3 symbols every 1.5 seconds (adhering to rate limit safely)
+setInterval(() => {
+    fetchMarketQuotes(["SBIN-EQ", "RELIANCE-EQ", "INFY-EQ"]);
+}, 1500);
+
 // Load token-symbol mappings
 async function loadTokenMappings() {
     try {

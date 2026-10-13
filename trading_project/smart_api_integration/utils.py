@@ -1,129 +1,100 @@
 import logging
 import pyotp
-from django.contrib.auth.models import User
 from django.utils import timezone
 from smart_api_integration.models import UserApiCredentials, UserApiTokens
-from SmartApi import SmartConnect
+from SmartApi.smartConnect import SmartConnect
 
 logger = logging.getLogger(__name__)
 
-class UserCredentialManager:
+class SmartApiClientFactory:
     """
-    Helper class to manage user SmartAPI credentials and token lifecycle.
+    Centralized Gateway Factory for SmartConnect.
+    Returns an authenticated SmartConnect client instance without 
+    exposing raw credentials or requiring manual token management.
     """
 
-    @staticmethod
-    def get_credentials_and_tokens(user):
+    @classmethod
+    def get_client(cls, user, auto_regenerate=True):
         """
-        Fetch API credentials and tokens for a given Django user.
-
-        Args:
-            user (User): The Django user instance.
-
-        Returns:
-            tuple: (api_key, client_id, jwt_token, feed_token) or (None, None, None, None)
+        Returns an authenticated SmartConnect instance or raises an Exception.
         """
         try:
-            # if not user.is_authenticated:
-            #     logger.warning("User is not authenticated.")
-            #     return None, None, None, None
-
             creds = UserApiCredentials.objects.get(user=user)
-            tokens = UserApiTokens.objects.get(user=user)
+            if creds.status != 'active':
+                raise PermissionError(f"API Credentials are {creds.status}.")
 
-            return {
-                "status": "success",
-                "data": {
-                    "jwt_token": tokens.jwt_token,
-                    "feed_token": tokens.feed_token,
-                    "client_code": creds.client_id,
-                    "api_key": creds.api_key
-                }
-            }
-        except UserApiCredentials.DoesNotExist:
-            logger.error(f"❌ UserApiCredentials not found for user: {user}")
-            return {
-                "status": "error",
-                "message": "User API credentials not found."
-            }
-        except UserApiTokens.DoesNotExist:
-            logger.error(f"❌ UserApiTokens not found for user: {user}")
-            return {
-                "status": "error",
-                "message": "User API tokens not found."
-            }
-        except Exception as e:
-            logger.error(f"❌ Error fetching credentials: {e}")
-            return {
-                "status": "error",
-                "message": str(e)
-            }
+            tokens = UserApiTokens.objects.filter(user=user).first()
 
+            # Trigger auto-regeneration if missing, marked failed, or expired
+            needs_refresh = (
+                not tokens or 
+                tokens.status == 'failed' or 
+                (tokens.expires_at and tokens.expires_at <= timezone.now())
+            )
+
+            if needs_refresh:
+                if auto_regenerate:
+                    logger.info(f"Regenerating session for user {user.username}...")
+                    return cls.regenerate_client_session(creds)
+                else:
+                    raise PermissionError("Tokens are expired or invalidated.")
+
+            # Create client with existing valid tokens
+            client = SmartConnect(api_key=creds.api_key)
+            client.setAccessToken(tokens.jwt_token)
+            client.setFeedToken(tokens.feed_token)
+            client.setUserId(creds.client_id)
+            return client
+
+        except (UserApiCredentials.DoesNotExist, UserApiTokens.DoesNotExist) as e:
+            logger.error(f"Credentials not found for {user}: {e}")
+            raise e
+
+    @classmethod
+    def regenerate_client_session(cls, creds):
+        """
+        Generates a fresh SmartConnect session using TOTP, updates DB,
+        and returns the initialized SmartConnect instance.
+        """
+        otp = pyotp.TOTP(creds.otp_secret_key).now()
+        client = SmartConnect(api_key=creds.api_key)
         
+        session = client.generateSession(
+            creds.client_id,
+            creds.passcode,
+            otp
+        )
 
-    @staticmethod
-    def regenerate_tokens(user):
+        if not session or not session.get("status"):
+            error_msg = session.get("message", "Session generation failed") if session else "No response"
+            logger.error(f"Session generation failed: {error_msg}")
+            raise ConnectionError(error_msg)
+
+        # In SmartConnect, generateSession already sets the internal tokens on `client`
+        # Extract raw strings for database storage
+        jwt_token = client.access_token
+        feed_token = client.getfeedToken()
+        refresh_token = session['data'].get('refreshToken', '')
+
+        # Persist to database
+        UserApiTokens.objects.update_or_create(
+            user=creds.user,
+            defaults={
+                "user_credentials": creds,
+                "jwt_token": jwt_token,
+                "refresh_token": refresh_token,
+                "feed_token": feed_token,
+                "expires_at": timezone.now() + timezone.timedelta(hours=24),
+                "status": "active"
+            }
+        )
+
+        return client
+
+    @classmethod
+    def flag_token_failed(cls, user):
         """
-        Regenerates SmartAPI tokens (JWT, feed) using OTP and updates the database.
-
-        Args:
-            user_id (int): Django user ID.
-
-        Returns:
-            dict: {
-                "status": "success",
-                "data": {
-                    "jwt_token": str,
-                    "feed_token": str,
-                    "client_code": str,
-                    "api_key": str
-                }
-            }
-            OR
-            {
-                "status": "error",
-                "message": str
-            }
+        Flags token as failed so the next call automatically triggers TOTP regeneration.
         """
-        try:
-            user_credentials = UserApiCredentials.objects.get(user=user)
-            otp = pyotp.TOTP(user_credentials.otp_secret_key).now()
-            connection_object = SmartConnect(api_key=user_credentials.api_key)
-            session_data = connection_object.generateSession(
-                user_credentials.client_id,
-                user_credentials.passcode,
-                otp
-            )
-            
-            # Save new tokens
-            jwt_token = session_data['data']['jwtToken']
-            refresh_token = session_data['data']['refreshToken']
-            feed_token = connection_object.getfeedToken()
-
-            # Correctly associate user_credentials and update existing record if found
-            user_tokens, created = UserApiTokens.objects.update_or_create(
-                user_credentials=user_credentials,
-                defaults={
-                    "user": user_credentials.user,
-                    "jwt_token": jwt_token,
-                    "refresh_token": refresh_token,
-                    "feed_token": feed_token,
-                    "expires_at": timezone.now() + timezone.timedelta(hours=24)
-                }
-            )
-            return {
-                "status": "success",
-                "data": {
-                    "jwt_token": jwt_token,
-                    "feed_token": feed_token,
-                    "client_code": user_credentials.client_id,
-                    "api_key": user_credentials.api_key
-                }
-            }
-
-        except Exception as e:
-            logger.error(f"❌ Token regeneration failed: {e}")
-            return {
-                "status": "error",
-                "message": str(e)
-            }
+        UserApiTokens.objects.filter(user=user).update(status='failed')
+        logger.warning(f"Tokens for user {user.username} marked as failed.")
